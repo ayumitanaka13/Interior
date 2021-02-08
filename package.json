@@ -1,0 +1,25 @@
+{
+  "name": "interior",
+  "version": "1.0.0",
+  "description": "select interior shop based in Vancouver, Canada",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass" : "node-sass sass/main.scss css/style.css -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayumitanaka13/Interior.git"
+  },
+  "keywords": [
+    "interior"
+  ],
+  "author": "Miyu Setoyama, Ayumi Tanaka",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ayumitanaka13/Interior/issues"
+  },
+  "homepage": "https://github.com/ayumitanaka13/Interior#readme",
+  "devDependencies": {
+    "node-sass": "^5.0.0"
+  }
+}
