@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap");
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  color: #000;
+  background-color: #EAE0D7;
+  font-family: 'Open Sans', sans-serif;
+  padding: 0 10%; }
+
+h1 {
+  font-size: 6.4em; }
+
+.nav {
+  border: 1px solid black;
+  text-align: center; }
+
+@media (max-width: 768px) {
+  body {
+    padding: 0 5%; } }

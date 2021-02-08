@@ -7,7 +7,24 @@
 }
 
 body {
-    color: $color-brown;
+    color: $color-black;
     background-color: $color-primary;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+
+    padding: 0 10%;
+}
+
+h1 {
+    font-size: 6.4em;
+}
+
+.nav {
+    border: 1px solid black;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    body {    
+        padding: 0 5%;
+    }
 }
