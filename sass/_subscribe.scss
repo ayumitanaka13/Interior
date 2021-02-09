@@ -32,6 +32,7 @@
 	transition: 0.4s;
 	background-color: $color-primary;
 }
+
 .ef:focus ~ .focus_line,
 .cp_iptxt.ef ~ .focus_line {
 	width: 100%;
@@ -47,6 +48,7 @@
 	letter-spacing: 0.5px;
 	color: $color-white;
 }
+
 .ef:focus ~ label, .cp_iptxt.ef ~ label {
 	font-size: 12px;
 	top: -16px;
