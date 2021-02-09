@@ -91,13 +91,14 @@ p {
       .nav a:hover {
         opacity: .5; } }
 
+nav {
+  width: 100%;
+  height: 70px;
+  position: relative; }
+
 .nav2 {
   display: block;
   /*トグルボタンのスタイルを指定*/ }
-  .nav2 nav {
-    width: 100%;
-    height: 70px;
-    position: relative; }
   .nav2 .drawer {
     display: flex;
     align-items: center;
@@ -105,9 +106,14 @@ p {
     position: relative;
     height: 70px;
     border: 1px solid black; }
-  .nav2 h3 {
-    text-align: center;
+  .nav2 h2 {
     border: 1px solid black; }
+    .nav2 h2 a {
+      color: #000;
+      text-decoration: none; }
+  .nav2 h3 a {
+    color: #000;
+    text-decoration: none; }
   .nav2 .menu {
     text-align: center;
     transition: 0.5s ease;
@@ -131,11 +137,11 @@ p {
         opacity: .5; }
   .nav2 .toggle {
     display: block;
-    position: fixed;
     width: 40px;
     height: 40px;
     cursor: pointer;
-    z-index: 3; }
+    z-index: 3;
+    border: 1px solid black; }
     .nav2 .toggle.active span:nth-child(1) {
       top: 18px;
       -webkit-transform: rotate(-45deg);
@@ -150,7 +156,7 @@ p {
       display: block;
       position: absolute;
       width: 50px;
-      border-bottom: solid 4px #333;
+      border-bottom: solid 4px #000;
       -webkit-transition: .35s ease-in-out;
       /*変化の速度を指定*/
       -moz-transition: .35s ease-in-out;
@@ -158,12 +164,6 @@ p {
       transition: .35s ease-in-out;
       /*変化の速度を指定*/
       /*各ボーダー少しずつずらす*/ }
-      .nav2 .toggle span :nth-child(1) {
-        top: 5px; }
-      .nav2 .toggle span :nth-child(2) {
-        top: 18px; }
-      .nav2 .toggle span :nth-child(3) {
-        top: 32px; }
 
 @media (min-width: 768px) {
   .nav2 {

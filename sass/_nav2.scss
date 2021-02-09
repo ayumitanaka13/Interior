@@ -1,12 +1,11 @@
+nav {
+    width: 100%;
+    height: 70px;
+    position: relative;
+}
 .nav2 {
     display: block;
 
-    nav {
-        width: 100%;
-        height: 70px;
-        position: relative;
-    }
-        
     .drawer{
         display: flex;
         align-items: center;
@@ -16,11 +15,19 @@
 
         border: 1px solid black;
     }
+    h2 {
+        border: 1px solid black;
+        a {
+            color: $color-black;
+            text-decoration: none;
+        }
+    }
 
     h3 {
-        text-align: center;
-
-        border: 1px solid black;
+        a {
+            color: $color-black;
+            text-decoration: none;
+        }
     }
                 
     .menu {
@@ -53,11 +60,13 @@
     /*トグルボタンのスタイルを指定*/
     .toggle {
         display: block;
-        position: fixed;
+        // position: fixed;
         width: 40px;
         height: 40px;
         cursor: pointer;
         z-index: 3;
+
+        border: 1px solid black;
 
         &.active {
             span {
@@ -80,21 +89,21 @@
             display: block;
             position: absolute;
             width: 50px;
-            border-bottom: solid 4px #333;
+            border-bottom: solid 4px $color-black;
             -webkit-transition: .35s ease-in-out;	/*変化の速度を指定*/
             -moz-transition: .35s ease-in-out;		/*変化の速度を指定*/
             transition: .35s ease-in-out;			/*変化の速度を指定*/ 
 
             /*各ボーダー少しずつずらす*/
-            :nth-child(1) {
-                top:5px;
-            }
-            :nth-child(2) {
-                top: 18px;
-            }
-            :nth-child(3) {
-                top: 32px;
-            }
+            // :nth-child(1) {
+            //     top:5px;
+            // }
+            // :nth-child(2) {
+            //     top: 18px;
+            // }
+            // :nth-child(3) {
+            //     top: 32px;
+            // }
         }
     }
 }
