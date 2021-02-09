@@ -1,16 +1,16 @@
 .title {
     display: none;
+            
+    padding: 4em 0;
+    text-align: center;
 }
 
 @media (min-width: 768px) {
-
+    .title {
+        display: block;
+    }
 }
 
 @media (min-width: 1024px) {
-    .title {
-        display: block;
-        
-        padding: 4em 0;
-        text-align: center;
-    }
+
 }
