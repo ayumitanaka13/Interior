@@ -1,4 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Montserrat:ital,wght@0,100;0,200;0,300;1,100;1,200;1,300&display=swap");
+.nav2 .drawer .toggle span, .nav2 .menu, .nav2 .menu li:nth-child(2) {
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000; }
+
+.nav {
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000; }
+
 *,
 *::before,
 *::after {
@@ -6,37 +14,181 @@
   padding: 0;
   box-sizing: border-box; }
 
+html {
+  font-size: 8px; }
+
 body {
   color: #000;
   background-color: #EAE0D7;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding: 0 5%; }
 
 h1 {
-  font-size: 9.2vw; }
+  font-size: 6em;
+  font-family: 'Cinzel', serif; }
+
 
 h2 {
-  font-size: 6.9vw; }
+  font-size: 4.5em;
+  font-family: 'Cinzel', serif; }
 
 h3 {
-  font-size: 4.6vw; }
+  font-size: 3em; }
 
 h4 {
-  font-size: 3.4vw; }
+  font-size: 2.25em;
+  font-family: 'Cinzel', serif; }
 
 h5 {
-  font-size: 2.3vw; }
+  font-size: 1.5em; }
 
 h6 {
-  font-size: 1.7vw; }
+  font-size: 1.125em; }
 
 p {
-  font-size: 1.3vw; }
+  font-size: 0.75em; }
 
-.nav {
-  border: 1px solid black;
-  text-align: center; }
+a {
+  color: #000;
+  text-decoration: none; }
+
+li {
+  list-style: none; }
 
 @media (min-width: 1024px) {
   body {
-    padding: 0 10%; } }
+    padding: 0 10%; } 
+  }
+  h1 {
+    font-size: 12em; }
+  h2 {
+    font-size: 9em; }
+  h3 {
+    font-size: 6em; }
+  h4 {
+    font-size: 4.5em; }
+  h5 {
+    font-size: 3em; }
+  h6 {
+    font-size: 2.25em; }
+  p {
+    font-size: 1.75em; } 
+
+
+.title {
+  display: none;
+  width: 100%;
+  padding: 4em 0;
+  text-align: center; }
+
+@media (min-width: 768px) {
+  .title {
+    display: block; } }
+
+.nav {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4em 0; }
+  .nav ul:nth-child(2) {
+    display: flex; }
+    .nav ul:nth-child(2) li {
+      margin: 0 2em; }
+  .nav li {
+    font-size: 3em; }
+  .nav a {
+    color: #000; }
+    .nav a:hover {
+      opacity: .5; }
+
+@media (min-width: 768px) {
+  .nav {
+    display: flex; } }
+
+.nav2 {
+  display: block;
+  width: 100%;
+  height: 70px;
+  position: fixed;
+  z-index: 101;
+  top: 0;
+  left: 0;
+  padding: 0 2rem;
+  background-color: #EAE0D7; }
+  .nav2 .drawer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 70px; }
+    .nav2 .drawer .toggle {
+      width: 40px;
+      height: 40px;
+      z-index: 1;
+      cursor: pointer; }
+      .nav2 .drawer .toggle.active span:nth-child(1) {
+        top: 32px;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        transform: rotate(-45deg); }
+      .nav2 .drawer .toggle.active span:nth-child(2), .nav2 .drawer .toggle.active span:nth-child(3) {
+        top: 32px;
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        transform: rotate(45deg); }
+      .nav2 .drawer .toggle span {
+        display: block;
+        position: absolute;
+        width: 40px;
+        -webkit-transition: .35s ease-in-out;
+        -moz-transition: .35s ease-in-out;
+        transition: .35s ease-in-out; }
+        .nav2 .drawer .toggle span:nth-child(1) {
+          top: 20px; }
+        .nav2 .drawer .toggle span:nth-child(2) {
+          top: 32px; }
+        .nav2 .drawer .toggle span:nth-child(3) {
+          top: 45px; }
+  .nav2 .menu {
+    position: relative;
+    text-align: center;
+    transition: 0.5s ease;
+    background-color: #EAE0D7;
+    -webkit-transform: translateX(-110%);
+    z-index: 100; }
+    .nav2 .menu.open {
+      -webkit-transform: translateX(0%);
+      transform: translateX(0%); }
+    .nav2 .menu li {
+      font-size: 1.5em; }
+      .nav2 .menu li a {
+        display: block;
+        padding: 0.8em 0; }
+        .nav2 .menu li a:hover {
+          opacity: .5; }
+
+@media (min-width: 768px) {
+  .nav2 {
+    display: none; } }
+
+.top {
+  margin: 16em 0;
+  position: relative; }
+  .top h1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-weight: 100;
+    text-align: center;
+    z-index: 1; }
+  .top img {
+    width: 100%;
+    height: 100%;
+    margin-top: 24%;
+    z-index: -1; }
+
+@media (min-width: 768px) {
+  .top h1 {
+    padding: 0 3em; }
+  .top img {
+    margin-top: 12%; } }

@@ -1,0 +1,36 @@
+.nav {
+    display: none;
+
+    align-items: center;
+    justify-content: space-between;
+    padding: 4em 0;
+    @extend %border-y-2;
+    
+    ul:nth-child(2) {
+        display: flex;
+        li {
+            margin: 0 2em;
+        }
+    }
+
+    li {
+        font-size: 3em;
+    }
+
+    a {
+        color: $color-black;
+        &:hover {
+            opacity: .5;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .nav {
+        display: flex;
+    }
+}
+
+@media (min-width: 1024px) {
+
+}
