@@ -33,8 +33,10 @@ nav {
     .menu {
         text-align:center;
         transition: 0.5s ease;
+        background-color: $color-primary;
         -webkit-transform: translateX(-110%);/*画面より100%外へ押し出し非表示にさせる*/
         border: 1px solid black;
+        z-index: 100;
 
         &.open {
             -webkit-transform: translateX(0%);
@@ -86,6 +88,8 @@ nav {
         }
 
         span {
+            // border: 1px solid black;
+
             display: block;
             position: absolute;
             width: 50px;
