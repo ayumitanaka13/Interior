@@ -1,0 +1,55 @@
+#contact {
+
+
+  .title {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+
+    width: 100%;
+    border-top: 1px solid $color-black;
+    border-bottom: 1px solid $color-black;
+    padding: 1em 0;
+    margin-bottom: 2em;
+  }
+
+  .content {
+    color: $color-white;
+
+    padding: 2em 6em;
+    height: 30vh;
+    background: url('../img/contact.jpg');
+    background-size: cover;
+
+    h4 {
+      margin-left: -1em;
+    }
+
+  }
+  .submit {
+    display: flex;
+    margin: 3em 0;
+
+    i {
+      font-size: 2em;
+    }
+
+  }
+
+  .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    div:first-child {
+      line-height: 2.5em;
+    }
+
+    i {
+      font-size: 1.3em;
+      margin: 0 .2em;
+      color: $color-white;
+    }
+  }
+}
