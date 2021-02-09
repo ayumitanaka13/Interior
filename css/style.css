@@ -10,15 +10,33 @@ body {
   color: #000;
   background-color: #EAE0D7;
   font-family: 'Open Sans', sans-serif;
-  padding: 0 10%; }
+  padding: 0 5%; }
 
 h1 {
-  font-size: 6.4em; }
+  font-size: 9.2vw; }
+
+h2 {
+  font-size: 6.9vw; }
+
+h3 {
+  font-size: 4.6vw; }
+
+h4 {
+  font-size: 3.4vw; }
+
+h5 {
+  font-size: 2.3vw; }
+
+h6 {
+  font-size: 1.7vw; }
+
+p {
+  font-size: 1.3vw; }
 
 .nav {
   border: 1px solid black;
   text-align: center; }
 
-@media (max-width: 768px) {
+@media (min-width: 1024px) {
   body {
-    padding: 0 5%; } }
+    padding: 0 10%; } }
