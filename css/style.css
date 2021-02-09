@@ -1,4 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Montserrat:ital,wght@0,100;0,200;0,300;1,100;1,200;1,300&display=swap");
+.nav2 .drawer .toggle span, .nav2 .menu, .nav2 .menu li:nth-child(2) {
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000; }
+
+.nav {
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000; }
+
 *,
 *::before,
 *::after {
@@ -81,9 +89,7 @@ li {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 4em 0;
-    border-top: 2px solid #000;
-    border-bottom: 2px solid #000; }
+    padding: 4em 0; }
     .nav ul:nth-child(2) {
       display: flex; }
       .nav ul:nth-child(2) li {
@@ -99,7 +105,12 @@ li {
   display: block;
   width: 100%;
   height: 70px;
-  position: relative; }
+  position: fixed;
+  z-index: 101;
+  top: 0;
+  left: 0;
+  padding: 0 2rem;
+  background-color: #EAE0D7; }
   .nav2 .drawer {
     display: flex;
     align-items: center;
@@ -125,7 +136,6 @@ li {
         display: block;
         position: absolute;
         width: 40px;
-        border-bottom: solid 2px #000;
         -webkit-transition: .35s ease-in-out;
         -moz-transition: .35s ease-in-out;
         transition: .35s ease-in-out; }
@@ -136,21 +146,17 @@ li {
         .nav2 .drawer .toggle span:nth-child(3) {
           top: 45px; }
   .nav2 .menu {
+    position: relative;
     text-align: center;
     transition: 0.5s ease;
     background-color: #EAE0D7;
     -webkit-transform: translateX(-110%);
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
     z-index: 100; }
     .nav2 .menu.open {
       -webkit-transform: translateX(0%);
       transform: translateX(0%); }
     .nav2 .menu li {
       font-size: 1.5em; }
-      .nav2 .menu li:nth-child(2) {
-        border-top: 1px solid #000;
-        border-bottom: 1px solid #000; }
       .nav2 .menu li a {
         display: block;
         padding: 0.8em 0; }

@@ -2,7 +2,12 @@
     display: block;
     width: 100%;
     height: 70px;
-    position: relative;
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    padding: 0 2rem;
+    background-color: $color-primary;
 
     .drawer{
         display: flex;
@@ -11,7 +16,7 @@
         position: relative;
         height: 70px;
 
-        // border: 1px solid black;
+        // @extend %border-1;;
 
         .toggle {
             // display: block;
@@ -21,7 +26,7 @@
             z-index: 1;
             cursor: pointer;
     
-            // border: 1px solid black;
+            // @extend %border-1;;
     
             &.active {
                 span {
@@ -44,10 +49,10 @@
                 display: block;
                 position: absolute;
                 width: 40px;
-                border-bottom: solid 2px $color-black;
                 -webkit-transition: .35s ease-in-out;
                 -moz-transition: .35s ease-in-out;
                 transition: .35s ease-in-out;
+                @extend %border-y-1;
     
                 &:nth-child(1) {
                     top:20px;
@@ -63,12 +68,12 @@
     }
                 
     .menu {
+        position: relative;
         text-align:center;
         transition: 0.5s ease;
         background-color: $color-primary;
         -webkit-transform: translateX(-110%);
-        border-top: 1px solid $color-black;
-        border-bottom: 1px solid $color-black;
+        @extend %border-y-1;
         z-index: 100;
         &.open {
             -webkit-transform: translateX(0%);
@@ -78,8 +83,7 @@
         li {
             font-size: 1.5em;
             &:nth-child(2) {
-                border-top: 1px solid $color-black;
-                border-bottom: 1px solid $color-black;
+                @extend %border-y-1;
             }
             a {
                 display:block;

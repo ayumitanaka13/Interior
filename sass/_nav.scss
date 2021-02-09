@@ -1,5 +1,6 @@
 .nav {
     display: none;
+    @extend %border-y-2;
 }
 
 @media (min-width: 768px) {
@@ -11,10 +12,8 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-    
         padding: 4em 0;
-        border-top: 2px solid $color-black;
-        border-bottom: 2px solid $color-black;
+        
     
         ul:nth-child(2) {
             display: flex;
