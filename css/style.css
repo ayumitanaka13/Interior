@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap");
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Open+Sans:ital,wght@0,300;1,300&display=swap");
 *,
 *::before,
 *::after {
@@ -6,19 +7,164 @@
   padding: 0;
   box-sizing: border-box; }
 
+html {
+  font-size: 8px; }
+
 body {
   color: #000;
   background-color: #EAE0D7;
   font-family: 'Open Sans', sans-serif;
-  padding: 0 10%; }
+  padding: 0 5%; }
 
 h1 {
-  font-size: 6.4em; }
+  font-size: 6em;
+  font-family: 'Cinzel', serif; }
+
+h2 {
+  font-size: 4.5em;
+  font-family: 'Cinzel', serif; }
+
+h3 {
+  font-size: 3em; }
+
+h4 {
+  font-size: 2.25em;
+  font-family: 'Cinzel', serif; }
+
+h5 {
+  font-size: 1.5em; }
+
+h6 {
+  font-size: 1.125em; }
+
+p {
+  font-size: 0.75em; }
+
+@media (min-width: 1024px) {
+  body {
+    padding: 0 10%; }
+  h1 {
+    font-size: 12em; }
+  h2 {
+    font-size: 9em; }
+  h3 {
+    font-size: 6em; }
+  h4 {
+    font-size: 4.5em; }
+  h5 {
+    font-size: 3em; }
+  h6 {
+    font-size: 2.25em; }
+  p {
+    font-size: 1.75em; } }
+
+.title {
+  display: none; }
+
+@media (min-width: 1024px) {
+  .title {
+    display: block;
+    padding: 4em 0;
+    text-align: center; } }
 
 .nav {
-  border: 1px solid black;
-  text-align: center; }
+  display: none; }
 
-@media (max-width: 768px) {
-  body {
-    padding: 0 5%; } }
+@media (min-width: 1024px) {
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4em 0;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000; }
+    .nav ul:nth-child(2) {
+      display: flex; }
+      .nav ul:nth-child(2) li {
+        margin: 0 0.4em; }
+    .nav li {
+      font-size: 3em;
+      list-style: none; }
+    .nav a {
+      color: #000;
+      text-decoration: none; }
+      .nav a:hover {
+        opacity: .5; } }
+
+.nav2 {
+  display: block;
+  /*トグルボタンのスタイルを指定*/ }
+  .nav2 nav {
+    width: 100%;
+    height: 70px;
+    position: relative; }
+  .nav2 .drawer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 70px;
+    border: 1px solid black; }
+  .nav2 h3 {
+    text-align: center;
+    border: 1px solid black; }
+  .nav2 .menu {
+    text-align: center;
+    transition: 0.5s ease;
+    -webkit-transform: translateX(-110%);
+    /*画面より100%外へ押し出し非表示にさせる*/
+    border: 1px solid black; }
+    .nav2 .menu.open {
+      -webkit-transform: translateX(0%);
+      transform: translateX(0%);
+      /*メニューを元の位置へ戻す*/ }
+    .nav2 .menu li {
+      font-size: 1.5em;
+      list-style: none; }
+      .nav2 .menu li a {
+        display: block;
+        padding: 0.8em 0;
+        color: #000;
+        text-decoration: none;
+        border-bottom: 1px solid #000; }
+      .nav2 .menu li:hover {
+        opacity: .5; }
+  .nav2 .toggle {
+    display: block;
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 3; }
+    .nav2 .toggle.active span:nth-child(1) {
+      top: 18px;
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      transform: rotate(-45deg); }
+    .nav2 .toggle.active span:nth-child(2), .nav2 .toggle.active span:nth-child(3) {
+      top: 18px;
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      transform: rotate(45deg); }
+    .nav2 .toggle span {
+      display: block;
+      position: absolute;
+      width: 50px;
+      border-bottom: solid 4px #333;
+      -webkit-transition: .35s ease-in-out;
+      /*変化の速度を指定*/
+      -moz-transition: .35s ease-in-out;
+      /*変化の速度を指定*/
+      transition: .35s ease-in-out;
+      /*変化の速度を指定*/
+      /*各ボーダー少しずつずらす*/ }
+      .nav2 .toggle span :nth-child(1) {
+        top: 5px; }
+      .nav2 .toggle span :nth-child(2) {
+        top: 18px; }
+      .nav2 .toggle span :nth-child(3) {
+        top: 32px; }
+
+@media (min-width: 768px) {
+  .nav2 {
+    display: none; } }

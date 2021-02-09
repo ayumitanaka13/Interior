@@ -10,17 +10,85 @@
     <meta name="author" content="Ayumi Tanaka"> -->
 
     <link rel="stylesheet" href="css/style.css" />
+    <!-- drawer.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
   </head>
+
 <body>
 
     <!-- Ayumi -->
-    <div class="nav">
-      <h2>Company Name</h2>
+
+    <!-- title -->
+    <div class="title">
+      <h3>Company Name</h3>
     </div>
 
+    <!-- nav -->
+    <nav class="nav">
+      <ul>
+        <li>
+          <a href="#top"><i class="fas fa-home"></i></a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="#about">About</a>
+        </li>
+        <li>
+          <a href="#store">Store</a>
+        </li>
+        <li>
+          <a href="#contact">Contact</a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <a href="#cart">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- nav for mobile -->
+    <nav class="nav2">
+      <div class="drawer">
+        <!-- hamburger--> 
+        <div class="toggle">
+        　　<span></span>
+        　　<span></span>
+        　　<span></span>
+        </div>
+        <h3>Company Name</h3>
+        <div>
+          <a href="#cart"><i class="fas fa-shopping-cart"></i>
+        </div>
+      </div>
+
+      <!-- menu -->
+      <div class="menu">
+        <ul>
+          <li>
+            <a href="#about">About</a>
+          </li>
+          <li>
+            <a href="#store">Store</a>
+          </li>
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="top">
+
+    </div>
+    
+    
     <!-- Miyu -->
 
-    <section id="about">
+    <!-- <section id="about">
       <div>
         <hr />
         <h2>About</h2>
@@ -28,8 +96,10 @@
 
 
       </div>
-    </section>
+    </section> -->
 
+    <!-- jquery & iScroll -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/4538f04da3.js" crossorigin="anonymous"></script>
     <!-- index.js -->
