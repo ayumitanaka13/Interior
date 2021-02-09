@@ -5,47 +5,60 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 html {
     font-size: 8px;
 }
-
 body {
     color: $color-black;
     background-color: $color-primary;
     font-family: 'Montserrat', sans-serif;
-
     padding: 0 5%;
 }
-
 h1 {
     font-size: 6em;
     font-family: 'Cinzel', serif;
 }
-
 h2 {
     font-size: 4.5em;
     font-family: 'Cinzel', serif;
 }
-
 h3 {
     font-size: 3em;
 }
-
 h4 {
     font-size: 2.25em;
     font-family: 'Cinzel', serif;
 }
-
 h5 {
     font-size: 1.5em;
 }
-
 h6 {
     font-size: 1.125em;
 }
-
 p {
+    font-size: 0.75em; 
+}
+a {
+    color: $color-black;
+    text-decoration: none;
+    cursor: pointer;
+}
+li {
+    list-style: none;
+}
+
+section {
+    margin: 2em 0;
+}
+
+input {
+    outline: none;
+    border: none;
+    color: $color-white;
+}
+
+button {
+    outline: none;
     font-size: 0.75em; 
 }
 a {
@@ -55,11 +68,8 @@ a {
 li {
     list-style: none;
 }
-
 @media (min-width: 768px) {
-
 }
-
 @media (min-width: 1024px) {
     body {    
         padding: 0 10%;

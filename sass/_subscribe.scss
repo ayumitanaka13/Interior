@@ -1,0 +1,58 @@
+.cp_iptxt {
+	position: relative;
+	width: 90%;
+  // margin: 40px 3%;
+  
+  input[type='text'] {
+    // font: 15px/24px sans-serif;
+    box-sizing: border-box;
+    width: 100%;
+    letter-spacing: 1px;
+    padding-left: 4em;
+    color: $color-white;
+    
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.ef {
+	padding: 4px 0;
+	border-bottom: 1px solid $color-white;
+	background-color: transparent;
+}
+
+.ef ~ .focus_line {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	height: 2px;
+	transition: 0.4s;
+	background-color: $color-primary;
+}
+
+.ef:focus ~ .focus_line,
+.cp_iptxt.ef ~ .focus_line {
+	width: 100%;
+	transition: 0.4s;
+}
+
+.ef ~ label {
+	position: absolute;
+	top: 4px;
+	left: 0;
+	width: 100%;
+	transition: 0.3s;
+	letter-spacing: 0.5px;
+	color: $color-white;
+}
+
+.ef:focus ~ label, .cp_iptxt.ef ~ label {
+	font-size: 12px;
+	top: -16px;
+	transition: 0.3s;
+	color: $color-primary;
+}
+
