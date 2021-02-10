@@ -18,37 +18,67 @@
 
     <!-- Ayumi -->
 
-    <!-- title -->
-    <section class="title">
+    <!-- header -->
+    <header class="header">
       <h3>Company Name</h3>
-    </section>
+      <!-- nav for laptop -->
+      <nav class="nav">
+        <ul>
+          <li>
+            <a href="#home"><i class="fas fa-home"></i></a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a href="#about">About</a>
+          </li>
+          <li>
+            <a href="#store">Store</a>
+          </li>
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <span>0</span>
+            <a href="#cart" class="shopping-cart">
+              <i class="fas fa-shopping-cart"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-    <!-- nav -->
-    <nav class="nav">
-      <ul>
-        <li>
-          <a href="#home"><i class="fas fa-home"></i></a>
-        </li>
-      </ul>
-      <ul>
-        <li>
-          <a href="#about">About</a>
-        </li>
-        <li>
-          <a href="#store">Store</a>
-        </li>
-        <li>
-          <a href="#contact">Contact</a>
-        </li>
-      </ul>
-      <ul>
-        <li>
-          <a href="#cart">
-            <i class="fas fa-shopping-cart"></i>
-          </a>
-        </li>
-      </ul>
-    </nav>
+      <div id="cart" class="cart">
+        <ul> 
+          <li id="cart_item_img">
+            <a href="#"><img src="/img/top.jpg" alt=""></a>
+          </li>
+          <li id="cart_item_title">
+            <a href="#">item name</a>
+          </li>
+          <li>
+            <input id="cart_quantity" type="number" value="1">
+          </li>
+          <li id="cart_price">
+            <a href="#">$ 0.00</a>
+          </li>
+          <li id="cart_trash">
+            <a href="#"><i class="fas fa-times"></i></a>
+          </li>
+        </ul>
+      </div>
+      <div id="cart" class="cart">
+        <ul> 
+          <li id="cart_total_price">
+            <a href="#">Total $ 10.00</a>
+          </li>
+          <li id="cart_checkout">
+            <a href="#">checkout</a>
+          </li>
+        </ul>
+      </div>
+    </header>
 
     <!-- nav for mobile -->
     <nav class="nav2">
@@ -63,11 +93,43 @@
           <a href="#home">Company Name</a>
         </h3>
         <h3>
-          <a href="#cart"><i class="fas fa-shopping-cart"></i></a>
+          <span>0</span>
+          <a href="#cart" class="shopping-cart">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
         </h3>
       </div>
-
       <!-- menu -->
+      <div id="cart" class="cart">
+        <ul> 
+          <li id="cart_item_img">
+            <a href="#"><img src="/img/top.jpg" alt=""></a>
+          </li>
+          <li id="cart_item_title">
+            <a href="#">item name</a>
+          </li>
+          <li>
+            <input id="cart_quantity" type="number" value="1">
+          </li>
+          <li id="cart_price">
+            <a href="#">$ 0.00</a>
+          </li>
+          <li id="cart_trash">
+            <a href="#"><i class="fas fa-times"></i></a>
+          </li>
+        </ul>
+      </div>
+      <div id="cart" class="cart">
+        <ul> 
+          <li id="cart_total_price">
+            <a href="#">Total $ 10.00</a>
+          </li>
+          <li id="cart_checkout">
+            <a href="#">checkout</a>
+          </li>
+        </ul>
+      </div>
+
       <div class="menu">
         <ul>
           <li>
@@ -83,6 +145,7 @@
       </div>
     </nav>
 
+    <!-- top section -->
     <section class="top">
       <h1>Here is what makes your life brighter.</h1>
       <img src="/img/top.jpg" alt="top">
@@ -267,7 +330,7 @@
     </footer>
     <!-- ----------------- footer end ----------------- -->
 
-    <!-- jquery & iScroll -->
+    <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/4538f04da3.js" crossorigin="anonymous"></script>

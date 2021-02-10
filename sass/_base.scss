@@ -16,10 +16,12 @@ body {
 }
 h1 {
     font-size: 6em;
+    font-weight: 100;
     font-family: 'Cinzel', serif;
 }
 h2 {
     font-size: 4.5em;
+    font-weight: 100;
     font-family: 'Cinzel', serif;
 }
 h3 {
@@ -27,6 +29,7 @@ h3 {
 }
 h4 {
     font-size: 2.25em;
+    font-weight: 100;
     font-family: 'Cinzel', serif;
 }
 h5 {
@@ -36,7 +39,7 @@ h6 {
     font-size: 1.125em;
 }
 p {
-    font-size: 0.75em; 
+    font-size: 1em; 
 }
 a {
     color: $color-black;
@@ -55,6 +58,7 @@ input {
     outline: none;
     border: none;
     color: $color-white;
+    font-family: 'Montserrat', sans-serif;;
 }
 
 button {
@@ -74,6 +78,29 @@ li {
     body {    
         padding: 0 10%;
     }
+    h1 {
+        font-size: 8.5em;
+    }
+    h2 {
+        font-size: 7em;
+    }
+    h3 {
+        font-size: 5.75em;
+    }
+    h4 {
+        font-size: 4.25em;
+    }
+    h5 {
+        font-size: 2em;
+    }
+    h6 {
+        font-size: 1.75em;
+    }
+    p {
+        font-size: 1.5em; 
+    }
+}
+@media (min-width: 1440px) {
     h1 {
         font-size: 12em;
     }

@@ -1,43 +1,42 @@
 .nav2 {
     display: block;
+
     width: 100%;
     height: 70px;
     position: fixed;
-    z-index: 101;
     top: 0;
     left: 0;
-    padding: 0 2rem;
+    z-index: 101;
     background-color: $color-primary;
+    @extend %border-b-1;
 
     .drawer{
         display: flex;
         align-items: center;
         justify-content: space-between;
-        position: relative;
+        
         height: 70px;
-
-        // @extend %border-1;;
+        padding: 0 5%;
+        position: relative;
 
         .toggle {
             // display: block;
             // position: fixed;
-            width: 40px;
-            height: 40px;
-            z-index: 1;
-            cursor: pointer;
-    
-            // @extend %border-1;;
+            // z-index: 1;
+            // width: 40px;
+            // height: 40px;
+            // cursor: pointer;
     
             &.active {
                 span {
                     &:nth-child(1) {
-                        top: 32px;
+                        top: 30px;
                         -webkit-transform: rotate(-45deg);
                         -moz-transform: rotate(-45deg);
                         transform: rotate(-45deg);
                     }
                     &:nth-child(2), &:nth-child(3) {
-                        top: 32px;
+                        top: 30px;
                         -webkit-transform: rotate(45deg);
                         -moz-transform: rotate(45deg);
                         transform: rotate(45deg);
@@ -46,9 +45,9 @@
             }
             
             span {
+                width: 30px;
                 display: block;
                 position: absolute;
-                width: 40px;
                 -webkit-transition: .35s ease-in-out;
                 -moz-transition: .35s ease-in-out;
                 transition: .35s ease-in-out;
@@ -65,6 +64,16 @@
                 }
             }
         }
+        h3:last-child {
+            position: relative;
+            span {
+                position: absolute;
+                top: -0.6em;
+                left:-0.8em;
+                font-size: small;
+                color: $color-secondary;
+            }
+        }
     }
                 
     .menu {
@@ -73,7 +82,6 @@
         transition: 0.5s ease;
         background-color: $color-primary;
         -webkit-transform: translateX(-110%);
-        @extend %border-y-1;
         z-index: 100;
         &.open {
             -webkit-transform: translateX(0%);
@@ -82,12 +90,11 @@
 
         li {
             font-size: 1.5em;
-            &:nth-child(2) {
-                @extend %border-y-1;
-            }
+            padding: 0.8em 0;
+            @extend %border-b-1;
+
             a {
                 display:block;
-                padding: 0.8em 0;
                 &:hover {
                     opacity: .5;
                 }
