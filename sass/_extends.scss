@@ -16,3 +16,16 @@
     border-top: 2px solid $color-black;
     border-bottom: 2px solid $color-black;
 }
+
+%flex-center {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+%sectionTop {
+    width: 100%;
+    border-top: 1px solid $color-black;
+    border-bottom: 1px solid $color-black;
+    padding: 3em 0;
+}
