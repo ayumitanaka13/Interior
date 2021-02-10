@@ -12,6 +12,15 @@ $(".shopping-cart").click(function () {
   $(".cart").slideToggle();
 });
 
+// slide function
+// let swiper = new Swiper('.swiper-container', {
+//   // ここからはオプションです。
+//   navigation: {
+//     nextEl: '.swiper-button-next',
+//     prevEl: '.swiper-button-prev',
+//   }
+// });
+
 // cart function
 // if (document.readyState == "loading") {
 //   document.addEventListener("DOMContentLoaded", ready);
@@ -19,7 +28,7 @@ $(".shopping-cart").click(function () {
 //   ready();
 // }
 
-ready();
+// ready();
 
 const cartItems = document.querySelector(".cart")[0];
 
@@ -120,9 +129,22 @@ function addItemToCart(title, price, imageSrc) {
     </ul>
   `;
 
-  header.insertBefore(div, cart);
-  nav.insertBefore(div, cart);
+
+  div.parentElement.insertBefore(div, cart);
+
+  // header.insertBefore(div, cart);
+
+  // let $win = $(window);
+  // $win.on('load resize', function() {
+  //   let windowWidth = window.inner
+  // })  
+
+  // header.insertBefore(div, cart);
+  // nav.insertBefore(div, cart);
+
   // div.appendChild(ul);
+  
+
   cart
     .querySelector("#cart_trash")[0]
     .addEventListener("click", removeCartItem);
@@ -145,8 +167,15 @@ function updateCartTotal() {
   total = Math.round(total * 100) / 100;
   document.querySelector("#cart_total_price")[0].innerText = `$ ${total}`;
 }
+
+///API/////////////////////////////////////////////////////////
 // api
-const cards = document.querySelector('.cards');
+const cardsWrapper = document.querySelector('.swiper-wrapper') 
+// const cards = document.querySelector('.cards');
+// const cards = document.createElement('div');
+// cards.classList.add('cards');
+// cards.id = 'swiper-slide';
+
 let responseData = [];
 
 getItems();
@@ -155,44 +184,114 @@ async function getItems() {
   const res = await axios.get('https://demo-api-project01.herokuapp.com/api/products');
   responseData = res.data
   showItems(responseData);
-  showTags(responseData);
+  // showTags(responseData);
 }
 
 function showItems(datas) {
-  cards.innerHTML = '';
 
   datas.forEach((data) => {
-    const {name, price, description, image_url} = data;
 
-    const card = document.createElement('div');
-    card.classList.add('card');
+    const iterate = datas.length/6; 
+    const counter = 0;
+    for (let i = 0; i < iterate; i++) {
+      //create the swipper-slide
+      const cards = document.createElement('div');
+      cards.classList.add('cards');
+      cards.id = 'swiper-slide';
+      cardsWrapper.appendChild(cards);
 
-    card.innerHTML = `
-          <div class="gallery_img">
-            <img id="item_image" src="${image_url}" alt="${name}">
-              <div class="caption">
-                <p>
-                  ${description}
-                </p>
+      for(let j = 0; j < 6; j++){
+        //display each card
+        const {name, price, description, image_url} = data;
+
+        const card = document.createElement('div');
+        card.classList.add('card');
+    
+        card.innerHTML = `
+              <div class="gallery_img">
+                <img id="item_image" src="${image_url}" alt="${name}">
+                  <div class="caption">
+                    <p>
+                      ${description}
+                    </p>
+                  </div>
               </div>
-          </div>
-          <div class="card_text">
-            <h6 class="item_title">${name}</h6>
-            <div>
-              <i id="add_item" class="fas fa-shopping-cart"></i>
-              <h6 class="price_sign">
-                $
-                <span id="price">
-                  ${price}
-                </span>
-              </h6>
-            </div>
-          </div>
-        `;
-
-    cards.appendChild(card);
+              <div class="card_text">
+                <h6 class="item_title">${name}</h6>
+                <div>
+                  <i id="add_item" class="fas fa-shopping-cart"></i>
+                  <h6 class="price_sign">
+                    $
+                    <span id="price">
+                      ${price}
+                    </span>
+                  </h6>
+                </div>
+              </div>
+            `;
+        
+        datas[counter];
+        counter++
+      }
+    }
   });
 }
+
+  // if (cards.childElementCount > 6) {
+  //   const cards = document.createElement('div');
+  //   cards.classList.add('swiper-slide');
+
+  //   datas.forEach((data) => {
+  //     const {name, price, description, image_url} = data;
+  
+  //     const card = document.createElement('div');
+  //     card.classList.add('card');
+
+  // cardsWrapper.innerHTML = '';
+  // cards.innerHTML = '';
+
+  // if (cards.childElementCount > 6) {
+  //   const cards = document.createElement('div');
+  //   cards.classList.add('swiper-slide');
+
+  //   datas.forEach((data) => {
+  //     const {name, price, description, image_url} = data;
+  
+  //     const card = document.createElement('div');
+  //     card.classList.add('card');
+  
+  //     card.innerHTML = `
+  //           <div class="gallery_img">
+  //             <img id="item_image" src="${image_url}" alt="${name}">
+  //               <div class="caption">
+  //                 <p>
+  //                   ${description}
+  //                 </p>
+  //               </div>
+  //           </div>
+  //           <div class="card_text">
+  //             <h6 class="item_title">${name}</h6>
+  //             <div>
+  //               <i id="add_item" class="fas fa-shopping-cart"></i>
+  //               <h6 class="price_sign">
+  //                 $
+  //                 <span id="price">
+  //                   ${price}
+  //                 </span>
+  //               </h6>
+  //             </div>
+  //           </div>
+  //         `;
+  //   });
+  
+  //   cards.appendChild(card);
+  //   cardsWrapper.appendChild(cards);
+  // } else {
+  //   const card = document.createElement('div');
+  //   card.classList.add('card');
+  //   cards.appendChild(card);
+  // }
+
 
 // show tags
 
@@ -207,7 +306,7 @@ search.addEventListener('input', function(e) {
 });
 
 // search tag
-const 
+//const 
 
 function findItem(searchItem) {
 
@@ -225,5 +324,6 @@ function findItem(searchItem) {
   showItems(filteredItems);
 
 }
+
 
 
