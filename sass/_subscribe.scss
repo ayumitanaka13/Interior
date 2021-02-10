@@ -18,7 +18,7 @@
 }
 
 .ef {
-	padding: 4px 0;
+	padding-bottom: 8px;
 	border-bottom: 1px solid $color-white;
 	background-color: transparent;
 }
@@ -50,9 +50,15 @@
 }
 
 .ef:focus ~ label, .cp_iptxt.ef ~ label {
-	font-size: 12px;
+	font-size: 1em;
 	top: -16px;
 	transition: 0.3s;
 	color: $color-primary;
+}
+
+@media (min-width: 1024px) {
+	label {
+		font-size: 2em;
+	}
 }
 
