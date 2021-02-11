@@ -39,7 +39,7 @@ function showItems(datas) {
   const iterate = datas.length/6; 
   let counter = 0;
   const cardsWrapper = document.querySelector('.swiper-wrapper');
-  // cardsWrapper.innerHTML = '';
+  cardsWrapper.innerHTML = '';
 
     for (let i = 0; i < iterate; i++) {
       //create the swipper-slide div
@@ -52,6 +52,35 @@ function showItems(datas) {
         const {name, price, description, image_url} = datas[counter];
         const card = document.createElement('div');
         card.classList.add('card');
+        const cardText = document.createElement('div');
+        cardText.classList.add('card_text');
+    
+        const itemTitle = document.createElement('h6');
+        itemTitle.classList.add('item_title')
+        itemTitle.innerHTML = `${name}`
+        cardText.appendChild(itemTitle)
+    
+        const addItemWrapper = document.createElement('div')
+        cardText.appendChild(addItemWrapper)
+        
+        const shoppingCart = document.createElement('i')
+        shoppingCart.classList.add('fas')
+        shoppingCart.classList.add('fa-shopping-cart')
+        shoppingCart.setAttribute('id', 'add_item')
+        addItemWrapper.appendChild(shoppingCart);
+    
+        // add clicked item to cart
+        shoppingCart.addEventListener("click", addToCart);
+    
+        const priceSign = document.createElement('h6');
+        priceSign.classList.add('price_sign')
+        priceSign.innerHTML = `
+            $
+            <span id="price">
+              ${price}
+            </span>
+        `
+        addItemWrapper.appendChild(priceSign);
     
         card.innerHTML = `
               <div class="gallery_img">
@@ -62,21 +91,11 @@ function showItems(datas) {
                     </p>
                   </div>
               </div>
-              <div class="card_text">
-                <h6 class="item_title">${name}</h6>
-                <div>
-                  <i id="add_item" class="fas fa-shopping-cart"></i>
-                  <h6 class="price_sign">
-                    $
-                    <span id="price">
-                      ${price}
-                    </span>
-                  </h6>
-                </div>
-              </div>
-            `;
-          
+        `
+        
+        card.appendChild(cardText)
         cards.appendChild(card);
+              
         datas[counter];
         counter++
       }
@@ -105,12 +124,32 @@ search.addEventListener('input', function(e) {
   findItem(e.target.value);
 });
 
+// function findItem(searchItem) {
+
+//   const filteredItems = responseData.filter((item) => {
+//     if (item.name.toLowerCase().includes(searchItem.toLowerCase())) {
+//       return item;
+//     } else if (item.category.toLowerCase().includes(searchItem.toLowerCase())){
+//       return item;
+//     } else if (item.description.toLowerCase().includes(searchItem.toLowerCase())) {
+//       return item;
+//     } else {
+//       return;
+//     }
+//   })
+//   showItems(filteredItems);
+// }
+
+// search tag
+const tag = document.querySelector('button');
+console.log(tag)
+
 function findItem(searchItem) {
 
   const filteredItems = responseData.filter((item) => {
     if (item.name.toLowerCase().includes(searchItem.toLowerCase())) {
       return item;
-    } else if (item.category.toLowerCase().includes(searchItem.toLowerCase())){
+    } else if (item.category.toLowerCase().includes(searchItem.toLowerCase())) {
       return item;
     } else if (item.description.toLowerCase().includes(searchItem.toLowerCase())) {
       return item;
@@ -119,120 +158,92 @@ function findItem(searchItem) {
     }
   })
   showItems(filteredItems);
+
 }
 
-// search tag
-const tag = document.querySelector('button');
-console.log(tag)
 
+// --------------------------- cart function ----------------------------
 
+const cart_items = document.querySelector("#cart_items");
 
-
-
-
-
-// cart function
-
-// if (document.readyState == "loading") {
-//   document.addEventListener("DOMContentLoaded", ready);
-// } else {
-//   ready();
-// }
-
-// ready();
-
-const cartItems = document.querySelector(".cart")[0];
-
-function ready() {
-  const removeItemButtons = document.querySelector("#cart_trash");
+// remove a item 
+const removeItemButtons = document.querySelectorAll("#cart_trash");
+for (let removeButton of removeItemButtons) {
   removeButton.addEventListener("click", removeCartItem);
-  // console.dir(removeItemButtons)
-  for (let removeButton of removeItemButtons) {
-    removeButton.addEventListener("click", removeCartItem);
-  }
-
-  const quantityInputs = document.querySelector("#cart_quantity");
-
-  for (let input of quantityInputs) {
-    input.addEventListener("change", quantityChanged);
-    console.log(quantityInputs);
-  }
-
-  const addToCartButtons = document.querySelector("#add_item");
-  for (let cartButton of addToCartButtons) {
-    cartButton.addEventListener("click", addToCart);
-  }
-
-  document
-    .querySelector("#cart_checkout")[0]
-    .addEventListener("click", purchaseClicked);
 }
 
-function purchaseClicked() {
+// change quantity 
+const quantityInputs = document.querySelectorAll("#cart_quantity");
+for (let input of quantityInputs) {
+  input.addEventListener("change", quantityChanged);
+}
+
+
+// click checkout
+const checkout = document.querySelector('#cart_checkout');
+checkout.addEventListener('click', function() {
   alert("Thank you for shopping with us!");
-  while (cartItems.hasChildNodes()) {
-    cartItems.removeChild(cartItems.firstChild);
+  while (cart_items.hasChildNodes()) {
+    cart_items.removeChild(cart_items.firstChild);
   }
-  updateCartTotal();
-}
+  updateCartQtyTotal();
+})
 
+// remove item from the cart
 function removeCartItem(e) {
   const removeButtonClicked = e.target;
-  removeButtonClicked.parentElement.parentElement.remove();
-  updateCartTotal();
+  removeButtonClicked.parentElement.parentElement.parentElement.parentElement.remove();
+  updateCartQtyTotal();
 }
 
+// change item quantity
 function quantityChanged(e) {
   const inputNum = e.target;
   if (isNaN(inputNum.value) || inputNum.value <= 0) {
     inputNum.value = 1;
   }
-  updateCartTotal();
+  updateCartQtyTotal();
 }
 
+// get clicked item 
 function addToCart(e) {
   const addButtonClicked = e.target;
   const shopItem = addButtonClicked.parentElement.parentElement.parentElement;
-  const title = shopItem.querySelector(".item_title")[0].innerText;
-  const price = shopItem.querySelector("#price")[0].innerText;
-  const imageSrc = shopItem.querySelector("#item_image")[0].src;
+  const title = shopItem.querySelector(".item_title").innerText;
+  const price = shopItem.querySelector("#price").innerText;
+  const imageSrc = shopItem.querySelector("#item_image").src;
   addItemToCart(title, price, imageSrc);
-  updateCartTotal();
+  updateCartQtyTotal();
 }
 
+// add clicked item to cart
 function addItemToCart(title, price, imageSrc) {
-  // const ul = document.createElement('ul');
-  const header = document.querySelector("header");
-  const nav = document.querySelector("nav");
-  const div = document.createElement("div");
-  const cart = document.querySelector(".cart_total");
-  div.id = "cart";
-  div.classList.add("cart");
-  // div.setAttribute("id", randomNum)
 
+  const cart = document.createElement("div");
+  cart.classList.add("cart");
 
   // to get what inside of cart
-  const cartItemNames = document.querySelector("#cart_item_title");
+  const cartItemNames = document.querySelectorAll("#cart_item_title");
   for (let cartItemName of cartItemNames) {
-    if (cartItemName.innerText === title) {
+    if (cartItemName.innerText.trim() === title) {
       alert("This item is alredy added to the cart.");
       return;
     }
   }
 
-  div.innerHTML = `
-    <ul> 
+  cart.innerHTML = `
+    <ul id="cart_item"> 
       <li id="cart_item_img">
-        <a href="#"><img src="/img/top.jpg" alt=""></a>
+        <img src="${imageSrc} alt="${title}">
       </li>
       <li id="cart_item_title">
-        <a href="#">item name</a>
+        ${title}
       </li>
       <li>
         <input id="cart_quantity" type="number" value="1">
       </li>
-      <li id="cart_price">
-        <a href="#">$ 0.00</a>
+      <li>
+        $ <span id="cart_price">${price}</span>
       </li>
       <li id="cart_trash">
         <a href="#"><i class="fas fa-times"></i></a>
@@ -240,41 +251,39 @@ function addItemToCart(title, price, imageSrc) {
     </ul>
   `;
 
-
-  div.parentElement.insertBefore(div, cart);
-
-  // header.insertBefore(div, cart);
-
-  // let $win = $(window);
-  // $win.on('load resize', function() {
-  //   let windowWidth = window.inner
-  // })  
-
-  // header.insertBefore(div, cart);
-  // nav.insertBefore(div, cart);
-
+  cart_items.append(cart);
   // div.appendChild(ul);
-  
+
+  // 親となる要素ノード.insertBefore(挿入するノード, 子ノード);
+  // const cart_total = document.querySelector('.cart_total');
+  // cart_items.insertBefore(cart, cart_total);
 
   cart
-    .querySelector("#cart_trash")[0]
+    .querySelector("#cart_trash")
     .addEventListener("click", removeCartItem);
   cart
-    .querySelector("#cart_quantity")[0]
+    .querySelector("#cart_quantity")
     .addEventListener("change", quantityChanged);
 }
 
-function updateCartTotal() {
-  const cart = document.querySelector(".cart");
-  let total = 0;
-  for (let i = 0; i < cart.length; i++) {
-    let cart = cart[i];
-    const priceElement = cart.querySelector("#cart_price")[0];
-    const quantityElement = cart.querySelector("#cart_quantity")[0];
-    const price = parseFloat(priceElement.innerText);
-    const quantity = quantityElement.value;
-    total = total + price * quantity;
+function updateCartQtyTotal() {
+  const carts = document.querySelectorAll("#cart_item");
+  // const sm_quantity = document.querySelector("#sm_quantity");
+
+  let total = 0.00;
+  let quantity = 0;
+  for (let cart of carts) {
+    const priceEl = cart.querySelector("#cart_price");
+    const quantityEl = cart.querySelector("#cart_quantity");
+    const price = parseFloat(priceEl.textContent);
+    quantity = quantityEl.value;
+    total += price * quantity;
+    // quantity += quantity;
   }
+  // quantity += quantity;
+  document.querySelectorAll("#sm_quantity").textContent = `${quantity}`;
+
   total = Math.round(total * 100) / 100;
-  document.querySelector("#cart_total_price")[0].innerText = `$ ${total}`;
+  document.querySelector("#cart_total_price").innerText = `Total $ ${total}`;
+
 }
