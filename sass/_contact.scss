@@ -15,6 +15,10 @@
     height: 50%;
     background: url('../img/contact.jpg');
     background-size: cover;
+
+    h4 {
+      margin-left: -1em;
+    }
   }
 
   .submit {
@@ -24,7 +28,6 @@
     i {
       font-size: 2em;
     }
-
   }
 
   .info {
