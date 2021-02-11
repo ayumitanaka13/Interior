@@ -208,13 +208,20 @@ checkout.addEventListener('click', function() {
 
 // remove item from the cart
 function removeCartItem(e) {
-  document.querySelectorAll('#cart_trash').forEach((ele)=> {
+  document.querySelectorAll('cart_item_title').forEach((ele)=> {
 
-    const cart_items = document.querySelectorAll('.cart_item');
+    const cart_item_titles = document.querySelectorAll('#cart_item_title') 
+    console.log(e.target);
 
-    for (cart_item of cart_items) {
-      cart_item.remove(ele);
-    }
+    const delete_item_title = e.target.attributes.alt.textContent;
+    console.log(delete_item_title);
+      for (cart_item_title of cart_item_titles) {
+        console.log(cart_item_title.innerText.trim());
+        if (cart_item_title.innerText === delete_item_title) {
+          e.target.remove(ele);
+        }
+      }
+    
   })
 
   updateCartQtyTotal();
@@ -271,7 +278,7 @@ function addItemToCart(title, price, imageSrc) {
           $ <span id="cart_price">${price}</span>
         </li>
         <li id="cart_trash">
-          <a href="#"><i class="fas fa-times"></i></a>
+          <a href="#"><i class="fas fa-times" alt="${title}"></i></a>
         </li>
       </ul>
     `;
