@@ -10,9 +10,9 @@ html {
 }
 body {
     color: $color-black;
+    padding: 0 5%;
     background-color: $color-primary;
     font-family: 'Montserrat', sans-serif;
-    padding: 0 5%;
 }
 h1 {
     font-size: 6em;
@@ -41,10 +41,6 @@ h6 {
 p {
     font-size: 1em; 
 }
-
-// label {
-//     font-size: .8vw;
-// }
 a {
     color: $color-black;
     text-decoration: none;
@@ -53,27 +49,21 @@ a {
 li {
     list-style: none;
 }
-
 section {
     margin: 3em 0;
 }
-
 input {
     outline: none;
     border: none;
     color: $color-white;
     font-family: 'Montserrat', sans-serif;;
-}
-
+} 
 button {
     outline: none;
     font-size: 0.75em;
     cursor: pointer;
 }
 
-.hide {
-    display: nonde;
-}
 
 @media (min-width: 768px) {
     button {
@@ -110,6 +100,7 @@ button {
         font-size: 1.6em; 
     }
 }
+
 @media (min-width: 1440px) {
     h1 {
         font-size: 12em;

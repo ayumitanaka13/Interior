@@ -51,6 +51,10 @@
   }
 
   // ---------------- cards start ----------------
+  .swiper-pagination-bullet-active {
+    background: $color-white;
+    outline: none;
+  }
 
   .cards {
     display: grid;
