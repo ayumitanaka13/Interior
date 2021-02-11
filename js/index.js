@@ -124,21 +124,6 @@ search.addEventListener('input', function(e) {
   findItem(e.target.value);
 });
 
-// function findItem(searchItem) {
-
-//   const filteredItems = responseData.filter((item) => {
-//     if (item.name.toLowerCase().includes(searchItem.toLowerCase())) {
-//       return item;
-//     } else if (item.category.toLowerCase().includes(searchItem.toLowerCase())){
-//       return item;
-//     } else if (item.description.toLowerCase().includes(searchItem.toLowerCase())) {
-//       return item;
-//     } else {
-//       return;
-//     }
-//   })
-//   showItems(filteredItems);
-// }
 
 // search tag
 const tag = document.querySelector('button');
@@ -164,7 +149,7 @@ function findItem(searchItem) {
 
 // --------------------------- cart function ----------------------------
 
-const cart_items = document.querySelector("#cart_items");
+const cart_items = document.querySelectorAll("#cart_items");
 
 // remove a item 
 const removeItemButtons = document.querySelectorAll("#cart_trash");
@@ -174,6 +159,7 @@ for (let removeButton of removeItemButtons) {
 
 // change quantity 
 const quantityInputs = document.querySelectorAll("#cart_quantity");
+// console.log(quantityInputs);
 for (let input of quantityInputs) {
   input.addEventListener("change", quantityChanged);
 }
@@ -218,10 +204,6 @@ function addToCart(e) {
 
 // add clicked item to cart
 function addItemToCart(title, price, imageSrc) {
-
-  const cart = document.createElement("div");
-  cart.classList.add("cart");
-
   // to get what inside of cart
   const cartItemNames = document.querySelectorAll("#cart_item_title");
   for (let cartItemName of cartItemNames) {
@@ -231,59 +213,97 @@ function addItemToCart(title, price, imageSrc) {
     }
   }
 
-  cart.innerHTML = `
-    <ul id="cart_item"> 
-      <li id="cart_item_img">
-        <img src="${imageSrc} alt="${title}">
-      </li>
-      <li id="cart_item_title">
-        ${title}
-      </li>
-      <li>
-        <input id="cart_quantity" type="number" value="1">
-      </li>
-      <li>
-        $ <span id="cart_price">${price}</span>
-      </li>
-      <li id="cart_trash">
-        <a href="#"><i class="fas fa-times"></i></a>
-      </li>
-    </ul>
-  `;
+  // to create cart_item for laptop and mobile
+  for (cart_item of cart_items) {
+    const cart = document.createElement('div');
+    cart.classList.add('cart');
+    cart.innerHTML = `
+      <ul id="cart_item"> 
+        <li id="cart_item_img">
+          <img src="${imageSrc} alt="${title}">
+        </li>
+        <li id="cart_item_title">
+          ${title}
+        </li>
+        <li>
+          <input id="cart_quantity" type="number" value="1">
+        </li>
+        <li>
+          $ <span id="cart_price">${price}</span>
+        </li>
+        <li id="cart_trash">
+          <a href="#"><i class="fas fa-times"></i></a>
+        </li>
+      </ul>
+    `;
+    cart_item.appendChild(cart);    
+  }
 
-  cart_items.append(cart);
-  // div.appendChild(ul);
+  const cart_trashes = document.querySelectorAll("#cart_trash");
+  const cart_quantities = document.querySelectorAll("#cart_quantity");
 
-  // 親となる要素ノード.insertBefore(挿入するノード, 子ノード);
-  // const cart_total = document.querySelector('.cart_total');
-  // cart_items.insertBefore(cart, cart_total);
-
-  cart
-    .querySelector("#cart_trash")
-    .addEventListener("click", removeCartItem);
-  cart
-    .querySelector("#cart_quantity")
-    .addEventListener("change", quantityChanged);
+  // to add remove func for laptop and mobile
+  for (cart_trash of cart_trashes) {
+    cart_trash.addEventListener("click", removeCartItem);
+  }
+  // to add quantity func for laptop and mobile
+  for (cart_quantity of cart_quantities) {
+    cart_quantity.addEventListener("change", quantityChanged);
+  }
 }
 
 function updateCartQtyTotal() {
   const carts = document.querySelectorAll("#cart_item");
+  // const cart_totals = document.querySelectorAll(".cart_total");
+  const cart_total_prices = document.querySelectorAll("#cart_total_price");
   // const sm_quantity = document.querySelector("#sm_quantity");
+  // console.log(cart_totals);
+  // console.log(cart_total_prices);
 
   let total = 0.00;
   let quantity = 0;
-  for (let cart of carts) {
+  for (cart of carts) {
     const priceEl = cart.querySelector("#cart_price");
     const quantityEl = cart.querySelector("#cart_quantity");
+
+    console.log(priceEl);
+    // console.log(quantityEl);
+
     const price = parseFloat(priceEl.textContent);
+    console.log(price);
+
     quantity = quantityEl.value;
-    total += price * quantity;
+    // console.log(quantity);
+    
+    total = price * quantity;
+    console.log(total);
+
+
     // quantity += quantity;
+    // document.querySelectorAll("#cart_total_price").innerText = `Total $ ${total}`;
+    
+    // console.log(totalPriceEl);
+    // totalPriceEl.innerText = `Total $ ${total}`;
+  
   }
+  total 
+
+  // total += price * quantity;
+  // console.log(total);
+
   // quantity += quantity;
   document.querySelectorAll("#sm_quantity").textContent = `${quantity}`;
 
   total = Math.round(total * 100) / 100;
-  document.querySelector("#cart_total_price").innerText = `Total $ ${total}`;
+  // document.querySelectorAll("#cart_total_price").innerText = `Total $ ${total}`;
+  
+  for (cart_total_price of cart_total_prices) {
+    cart_total_price.innerText = `Total $ ${total}`;
+  }
+  // cart_total_price = total;
+  // cart_total_price.innerText = `Total $ ${total}`;
+  // console.log(cart_total_price);
+  // total = total + cart_total_price;
+  // console.log(document.querySelectorAll("#cart_total_price"));
 
 }

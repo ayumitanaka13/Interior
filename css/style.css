@@ -137,8 +137,8 @@ button {
   z-index: 100;
   top: 0;
   left: 0; }
-  .header h3 {
-    margin: 0.8em 0; }
+  .header h4 {
+    margin: 0.6em 0; }
 
 @media (min-width: 768px) {
   .header {
