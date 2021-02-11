@@ -167,7 +167,7 @@ function addToCart(e) {
   const price = shopItem.querySelector("#price").innerText;
   const imageSrc = shopItem.querySelector("#item_image").src;
   addItemToCart(title, price, imageSrc);
-  updateCartQtyTotal();
+  updateCartQtyTotgital();
 }
 
 // add clicked item to cart
