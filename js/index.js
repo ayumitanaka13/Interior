@@ -159,7 +159,6 @@ for (let removeButton of removeItemButtons) {
 
 // change quantity 
 const quantityInputs = document.querySelectorAll("#cart_quantity");
-// console.log(quantityInputs);
 for (let input of quantityInputs) {
   input.addEventListener("change", quantityChanged);
 }
@@ -262,31 +261,61 @@ function updateCartQtyTotal() {
 
   let total = 0.00;
   let quantity = 0;
+  let cart_total = 0.00;
+
   for (cart of carts) {
     const priceEl = cart.querySelector("#cart_price");
     const quantityEl = cart.querySelector("#cart_quantity");
+    // console.log(quantityEl);
 
-    console.log(priceEl);
+    // console.log(priceEl);
     // console.log(quantityEl);
 
     const price = parseFloat(priceEl.textContent);
-    console.log(price);
+    // console.log(price);
+
+    // for (q of quantityEls) {
+    //   quantity = q.value;
+    //   console.log(q);
+    //   console.log(quantity);
+    // }
 
     quantity = quantityEl.value;
+
     // console.log(quantity);
-    
+
     total = price * quantity;
-    console.log(total);
+    // console.log(total);
 
-
+    // cart_total += total;
+    // console.log(cart_total);
     // quantity += quantity;
     // document.querySelectorAll("#cart_total_price").innerText = `Total $ ${total}`;
     
     // console.log(totalPriceEl);
     // totalPriceEl.innerText = `Total $ ${total}`;
-  
   }
-  total 
+
+
+  // to show same quantities on laptop and mobile
+  const quantityEls = document.querySelectorAll("#cart_quantity");
+  if (quantityEls[0].value > quantityEls[1].value) {
+    quantityEls[1].value = quantityEls[0].value;
+  } else if (quantityEls[1].value > quantityEls[0].value) {
+    quantityEls[0].value = quantityEls[1].value;
+  }
+
+  // for (q of quantityEls) {
+  //   console.log(q.value);
+  // }
+
+  // console.log(quantityEls[0].value);
+  // console.log(quantityEls[1].value);
+
+    // for (q of quantityEls) {
+    //   console.log(q.value);
+    // }
+
 
   // total += price * quantity;
   // console.log(total);
@@ -298,8 +327,17 @@ function updateCartQtyTotal() {
   // document.querySelectorAll("#cart_total_price").innerText = `Total $ ${total}`;
   
   for (cart_total_price of cart_total_prices) {
+
+
+    // console.log(total);
+    // console.log(cart_total_price.innerText);
+    
     cart_total_price.innerText = `Total $ ${total}`;
+    // console.log(cart_total_price);
+    // total = total + cart_total_price;
+    // console.log(total);    
   }
+
   // cart_total_price = total;
   // cart_total_price.innerText = `Total $ ${total}`;
   // console.log(cart_total_price);
