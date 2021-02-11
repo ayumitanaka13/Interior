@@ -10,7 +10,7 @@
   border-top: 2px solid #000;
   border-bottom: 2px solid #000; }
 
-#about, #contact .title {
+#about, #store .main_img, #store .search_row, #contact .title {
   display: flex;
   justify-content: center;
   text-align: center; }
@@ -85,6 +85,12 @@ button {
   outline: none;
   font-size: 0.75em;
   cursor: pointer; }
+
+i {
+  cursor: pointer; }
+
+.hide {
+  display: none; }
 
 @media (min-width: 768px) {
   button {
@@ -314,17 +320,11 @@ button {
 #store .main_img {
   background: url("../img/store.jpg");
   background-size: cover;
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   color: #FFF;
   height: 25vh; }
 
 #store .search_row {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   flex-wrap: wrap;
   margin: 1em 0; }
 
@@ -347,7 +347,7 @@ button {
   padding: .7em 2.5em;
   margin: 1%;
   color: #FFF;
-  cursor: pointer; }
+  text-transform: lowercase; }
   #store button:hover {
     background-color: #C6C0BC; }
 
@@ -368,7 +368,7 @@ button {
       display: none; }
   #store .cards img {
     width: 100%;
-    height: 200px; }
+    height: 250px; }
   #store .cards .gallery_img {
     position: relative;
     overflow: hidden; }
@@ -391,20 +391,20 @@ button {
     align-items: center;
     text-align: center;
     padding: 0 13%;
-    line-height: 3em; }
+    line-height: 1.7em; }
   #store .cards .card_text {
     display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
+    flex-direction: column;
+    align-items: center;
     margin: 2em 0; }
     #store .cards .card_text div {
       display: flex;
       align-items: flex-end;
-      color: #FFF; }
+      color: #FFF;
+      margin-top: 1.5em; }
     #store .cards .card_text i {
-      font-size: 1.5em;
-      margin-right: .7em;
-      cursor: pointer; }
+      font-size: 2em;
+      margin-right: .7em; }
       #store .cards .card_text i:hover {
         color: rgba(255, 192, 203, 0.562); }
 
@@ -448,17 +448,19 @@ button {
     padding: .7em 3em; }
   #store .cards {
     grid-column-gap: 3.5em; }
+    #store .cards .caption {
+      line-height: 3em; }
     #store .cards .card_text {
       margin: 5em 0; }
       #store .cards .card_text i {
         font-size: 3em;
         margin-right: .7em; }
     #store .cards img {
-      height: 400px; } }
+      height: 350px; } }
 
 @media (min-width: 1440px) {
   #store .cards img {
-    height: 600px; } }
+    height: 650px; } }
 
 #contact .title {
   flex-direction: column;
@@ -470,6 +472,8 @@ button {
   height: 50%;
   background: url("../img/contact.jpg");
   background-size: cover; }
+  #contact .content h4 {
+    margin-left: -1em; }
 
 #contact .submit {
   display: flex;

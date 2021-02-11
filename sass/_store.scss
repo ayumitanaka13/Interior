@@ -3,19 +3,17 @@
   .main_img {
     background: url('../img/store.jpg');
     background-size: cover;
-    display: flex;
+    
+    @extend %flex-center;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 
     color: $color-white;
     height: 25vh;
   }
 
   .search_row {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    @extend %flex-center;
+
     flex-wrap: wrap;
     margin: 1em 0;
   }
@@ -43,7 +41,7 @@
     padding: .7em 2.5em;
     margin: 1%;
     color: $color-white;
-    cursor: pointer;
+    text-transform: lowercase;
 
     &:hover {
       background-color: $color-secondary;
@@ -74,13 +72,12 @@
 
     img {
       width: 100%;
-      height: 200px;
+      height: 250px;
     }
 
     .gallery_img {
       position: relative;
       overflow: hidden;
-      // height: 550px;
   
       &:hover .caption {
         opacity: 1;
@@ -106,25 +103,25 @@
       // padding-top: 200px;
       // padding-bottom: 0px;
       padding: 0 13%;
-      line-height: 3em;
+      line-height: 1.7em;
     }
 
     .card_text {
       display: flex;
-      justify-content: space-around;
-      align-items: flex-end;
+      flex-direction: column;
+      align-items: center;
       margin: 2em 0;
       
       div {
         display: flex;
         align-items: flex-end;
         color: $color-white;
+        margin-top: 1.5em;
       }
 
       i {
-        font-size: 1.5em;
+        font-size: 2em;
         margin-right: .7em;
-        cursor: pointer;
 
         &:hover {
           // color: $color-primary;
@@ -212,6 +209,10 @@
     .cards {
       grid-column-gap: 3.5em;
 
+      .caption {
+        line-height: 3em;
+      }
+
       .card_text {
         margin: 5em 0;
     
@@ -222,7 +223,7 @@
       }
             
       img {
-        height: 400px;
+        height: 350px;
       }
     }
   }
@@ -232,7 +233,7 @@
   #store {
     .cards {            
       img {
-        height: 600px;
+        height: 650px;
       }
     }
   }

@@ -1,4 +1,3 @@
-// menu open
 $(function () {
   $(".toggle").click(function () {
     $(this).toggleClass("active");
@@ -6,11 +5,21 @@ $(function () {
   });
 });
 
-// cart open
+const clickedMenu = () => {
+  $(".toggle").toggleClass("active");
+  $(".menu").removeClass("open");
+}
+
+
 $(".shopping-cart").click(function () {
   $(this).toggleClass("on");
   $(".cart").slideToggle();
 });
+
+// $("#store").click(function () {
+//   $(".shopping-cart").removeClass("on");
+//   $(".cart").slideToggle();
+// });
 
 // page slide
 const swiper = new Swiper('.swiper-container', {
@@ -23,6 +32,8 @@ const swiper = new Swiper('.swiper-container', {
 
 //// api
 let responseData = [];
+let tagsArr = [];
+let arr = [];
 getItems();
 
 // getItems
@@ -95,9 +106,11 @@ function showItems(datas) {
         
         card.appendChild(cardText)
         cards.appendChild(card);
+        arr.push(card);
               
         datas[counter];
-        counter++
+        counter++;
+        
       }
       cardsWrapper.appendChild(cards);
     }
@@ -106,46 +119,30 @@ function showItems(datas) {
 
 // showTags
 function showTags(datas) {
+  let tags = [];
   datas.forEach((data) => {
-    const {category} = data;
+    tagsArr.push(data.category);
+    tags = tagsArr.filter(function (x, i, self) {
+      return self.indexOf(x) === i;
+    })
+  })
+  tags.forEach((tag) => {
     const categories = document.querySelector('.categories');
     const btn = document.createElement('button');
-
-    btn.innerText = `# ${category}`;
-    categories.appendChild(btn);
-  });
+    btn.classList.add('category');
+    btn.innerText = `# ${tag}`;
+    categories.append(btn);
+});
 }
 
 // search item
-// searching input
 const search = document.querySelector('.search');
 
 search.addEventListener('input', function(e) {
   findItem(e.target.value);
 });
 
-// function findItem(searchItem) {
-
-//   const filteredItems = responseData.filter((item) => {
-//     if (item.name.toLowerCase().includes(searchItem.toLowerCase())) {
-//       return item;
-//     } else if (item.category.toLowerCase().includes(searchItem.toLowerCase())){
-//       return item;
-//     } else if (item.description.toLowerCase().includes(searchItem.toLowerCase())) {
-//       return item;
-//     } else {
-//       return;
-//     }
-//   })
-//   showItems(filteredItems);
-// }
-
-// search tag
-const tag = document.querySelector('button');
-console.log(tag)
-
 function findItem(searchItem) {
-
   const filteredItems = responseData.filter((item) => {
     if (item.name.toLowerCase().includes(searchItem.toLowerCase())) {
       return item;
@@ -158,8 +155,25 @@ function findItem(searchItem) {
     }
   })
   showItems(filteredItems);
-
+  console.log(filteredItems);
 }
+
+// search.addEventListener('input', function(e) {
+//   filterData(e.target.value);
+// });
+// function filterData(searchItem) {
+//   arr.forEach(item => {
+//       /* add conditional logic below */
+//       console.log(item);
+//     if (item.innerText.toLowerCase().includes(searchItem.toLowerCase())) {
+//           //remove the class of .hide
+//           item.classList.remove('hide');
+//       } else {
+//           //add the class of .hide
+//           item.classList.add('hide');
+//       }
+//   })
+// }
 
 
 // --------------------------- cart function ----------------------------
