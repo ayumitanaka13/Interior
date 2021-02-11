@@ -5,10 +5,10 @@ $(function () {
   });
 });
 
-const clickedMenu = () => {
-  $(".toggle").toggleClass("active");
-  $(".menu").removeClass("open");
-}
+// const clickedMenu = () => {
+//   $(".toggle").toggleClass("active");
+//   $(".menu").removeClass("open");
+// }
 
 
 $(".shopping-cart").click(function () {
@@ -181,17 +181,20 @@ function findItem(searchItem) {
 const cart_items = document.querySelectorAll("#cart_items");
 
 // remove a item 
-const removeItemButtons = document.querySelectorAll("#cart_trash");
-for (let removeButton of removeItemButtons) {
+const removeItemButtons = document.querySelectorAll("#cart_trash")
+.forEach(()=> {
   removeButton.addEventListener("click", removeCartItem);
-}
+})
+
+// for (let removeButton of removeItemButtons) {
+//   removeButton.addEventListener("click", removeCartItem);
+// }
 
 // change quantity 
 const quantityInputs = document.querySelectorAll("#cart_quantity");
 for (let input of quantityInputs) {
   input.addEventListener("change", quantityChanged);
 }
-
 
 // click checkout
 const checkout = document.querySelector('#cart_checkout');
@@ -205,8 +208,15 @@ checkout.addEventListener('click', function() {
 
 // remove item from the cart
 function removeCartItem(e) {
-  const removeButtonClicked = e.target;
-  removeButtonClicked.parentElement.parentElement.parentElement.parentElement.remove();
+  document.querySelectorAll('#cart_trash').forEach((ele)=> {
+
+    const cart_items = document.querySelectorAll('.cart_item');
+
+    for (cart_item of cart_items) {
+      cart_item.remove(ele);
+    }
+  })
+
   updateCartQtyTotal();
 }
 
@@ -245,6 +255,7 @@ function addItemToCart(title, price, imageSrc) {
   for (cart_item of cart_items) {
     const cart = document.createElement('div');
     cart.classList.add('cart');
+    cart.classList.add('cart_item');
     cart.innerHTML = `
       <ul id="cart_item"> 
         <li id="cart_item_img">
@@ -279,6 +290,7 @@ function addItemToCart(title, price, imageSrc) {
     cart_quantity.addEventListener("change", quantityChanged);
   }
 }
+
 
 function updateCartQtyTotal() {
   const carts = document.querySelectorAll("#cart_item");
@@ -327,12 +339,12 @@ function updateCartQtyTotal() {
 
 
   // to show same quantities on laptop and mobile
-  const quantityEls = document.querySelectorAll("#cart_quantity");
-  if (quantityEls[0].value > quantityEls[1].value) {
-    quantityEls[1].value = quantityEls[0].value;
-  } else if (quantityEls[1].value > quantityEls[0].value) {
-    quantityEls[0].value = quantityEls[1].value;
-  }
+  // const quantityEls = document.querySelectorAll("#cart_quantity");
+  // if (quantityEls[0].value > quantityEls[1].value) {
+  //   quantityEls[1].value = quantityEls[0].value;
+  // } else if (quantityEls[1].value > quantityEls[0].value) {
+  //   quantityEls[0].value = quantityEls[1].value;
+  // }
 
   // for (q of quantityEls) {
   //   console.log(q.value);
