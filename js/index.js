@@ -21,8 +21,7 @@ const swiper = new Swiper('.swiper-container', {
   }
 });
 
-// api
-
+//// api
 let responseData = [];
 getItems();
 
@@ -93,7 +92,6 @@ function showTags(datas) {
     const categories = document.querySelector('.categories');
     const btn = document.createElement('button');
 
-    if (category)
     btn.innerText = `# ${category}`;
     categories.appendChild(btn);
   });
