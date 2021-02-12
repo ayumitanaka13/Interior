@@ -53,20 +53,28 @@ async function getItems() {
 
 // showItems
 function showItems(datas) {
-  const iterate = datas.length / 6
-  let counter = 0
+  const apiData = datas
+  const size = 6
   const cardsWrapper = document.querySelector('.swiper-wrapper')
   cardsWrapper.innerHTML = ''
 
-  for (let i = 0; i < iterate; i++) {
-    //create the swipper-slide div
+  const chunkedArr = new Array(Math.ceil(apiData.length / size))
+    .fill('')
+    .map(function () {
+      return this.splice(0, size)
+    }, apiData.slice())
+
+  console.log(chunkedArr)
+
+
+  chunkedArr.forEach((box, index) => {
+
     const cards = document.createElement('div')
     cards.classList.add('swiper-slide')
     cards.classList.add('cards')
 
-    for (let j = 0; j < 6; j++) {
-      //create the card div to display each card
-      const { id, name, price, description, image_url } = datas[counter]
+    box.forEach((item, index) => {
+      const { id, name, price, description, image_url } = item
       const card = document.createElement('div')
       card.classList.add('card')
       card.id = id
@@ -117,12 +125,10 @@ function showItems(datas) {
       card.appendChild(cardText)
       cards.appendChild(card)
       arr.push(card)
+    })
 
-      datas[counter]
-      counter++
-    }
     cardsWrapper.appendChild(cards)
-  }
+  })
   swiper.update()
 }
 
@@ -165,7 +171,7 @@ function findItem(searchItem) {
       return
     }
   })
-  showItems(filteredItems);
+  showItems(filteredItems)
   // console.log(filteredItems);
 }
 
@@ -182,7 +188,6 @@ function findItem(searchItem) {
 //       }
 //   })
 // }
-
 
 // --------------------------- cart function ----------------------------
 
@@ -206,17 +211,15 @@ checkout.addEventListener('click', function () {
 
 // remove item from the cart
 function removeCartItem(itemId) {
-
   //remove item from global array
-  cartArr = cartArr.filter(product => product.id !== itemId)
+  cartArr = cartArr.filter((product) => product.id !== itemId)
 
   //remove item from each mobile/desktop cart_item div
   cart_items.forEach(() => {
-    $("#"+ itemId).remove();
+    $('#' + itemId).remove()
   })
   updateCartQtyTotal()
 }
-
 
 // change item quantity
 function quantityChanged(e) {
@@ -251,7 +254,7 @@ function addItemToCart(arr) {
       const cart = document.createElement('div')
       cart.classList.add('cart')
       cart.classList.add('cart_item')
-      cart.id=product.id
+      cart.id = product.id
       const cartUL = document.createElement('ul')
 
       cartUL.id = 'cart_item'
@@ -283,7 +286,6 @@ function addItemToCart(arr) {
   })
 }
 
-
 function updateCartQtyTotal() {
   const carts = document.querySelectorAll('#cart_item')
   // const cart_totals = document.querySelectorAll(".cart_total");
@@ -295,61 +297,60 @@ function updateCartQtyTotal() {
   let cart_total = 0.0
 
   for (cart of carts) {
-    const priceEl = cart.querySelector("#cart_price");
-    const quantityEl = cart.querySelector("#cart_quantity");
+    const priceEl = cart.querySelector('#cart_price')
+    const quantityEl = cart.querySelector('#cart_quantity')
 
     // total += price * quantity / 2;
   }
-    const price = parseFloat(priceEl.textContent);
+  const price = parseFloat(priceEl.textContent)
 
-    quantity = quantityEl.value
+  quantity = quantityEl.value
 
-    total = price * quantity;
+  total = price * quantity
 
-    // cart_total += total;
-    // quantity += quantity;
-    // document.querySelectorAll("#cart_total_price").innerText = `Total $ ${total}`;
-
-    // totalPriceEl.innerText = `Total $ ${total}`;
-  }
-
-  // to show same quantities on laptop and mobile
-  // const quantityEls = document.querySelectorAll("#cart_quantity");
-  // if (quantityEls[0].value > quantityEls[1].value) {
-  //   quantityEls[1].value = quantityEls[0].value;
-  // } else if (quantityEls[1].value > quantityEls[0].value) {
-  //   quantityEls[0].value = quantityEls[1].value;
-  // }
-
-  document.querySelectorAll("#sm_quantity").textContent = `${quantity}`;
-
-  total = Math.round(total * 100) / 100
+  // cart_total += total;
+  // quantity += quantity;
   // document.querySelectorAll("#cart_total_price").innerText = `Total $ ${total}`;
 
-  for (cart_total_price of cart_total_prices) {
+  // totalPriceEl.innerText = `Total $ ${total}`;
+}
 
-    cart_total_price.innerText = `Total $ ${total}`;
-  }
+// to show same quantities on laptop and mobile
+// const quantityEls = document.querySelectorAll("#cart_quantity");
+// if (quantityEls[0].value > quantityEls[1].value) {
+//   quantityEls[1].value = quantityEls[0].value;
+// } else if (quantityEls[1].value > quantityEls[0].value) {
+//   quantityEls[0].value = quantityEls[1].value;
+// }
 
- // to show same quantities on laptop and mobile
+document.querySelectorAll('#sm_quantity').textContent = `${quantity}`
+
+total = Math.round(total * 100) / 100
+// document.querySelectorAll("#cart_total_price").innerText = `Total $ ${total}`;
+
+for (cart_total_price of cart_total_prices) {
+  cart_total_price.innerText = `Total $ ${total}`
+}
+
+// to show same quantities on laptop and mobile
 //  const quantityEls = document.querySelectorAll("#cart_quantity");
 //  for (let quantityEl of quantityEls) {
 //    quantityEl.addEventListener("change", function() {
 //      quantityEl[0] = quantityEl[1];
 //    });
-//  } 
- // if (quantityEls[0].value > quantityEls[1].value) {
- //   quantityEls[1].value = quantityEls[0].value;
- // } else if (quantityEls[1].value > quantityEls[0].value) {
- //   quantityEls[0].value = quantityEls[1].value;
- // }
+//  }
+// if (quantityEls[0].value > quantityEls[1].value) {
+//   quantityEls[1].value = quantityEls[0].value;
+// } else if (quantityEls[1].value > quantityEls[0].value) {
+//   quantityEls[0].value = quantityEls[1].value;
+// }
 
- // change quantity 
-const quantityEls = document.querySelectorAll("#cart_quantity");
+// change quantity
+const quantityEls = document.querySelectorAll('#cart_quantity')
 for (let quantityEl of quantityEls) {
-  quantityEl.addEventListener("change", function() {
-    quantityEl[0] = quantityEl[1];
-  });
+  quantityEl.addEventListener('change', function () {
+    quantityEl[0] = quantityEl[1]
+  })
   // cart_total_price = total;
   // cart_total_price.innerText = `Total $ ${total}`;
   // console.log(cart_total_price);
