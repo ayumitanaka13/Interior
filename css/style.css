@@ -1,10 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel&family=Montserrat:ital,wght@0,100;0,200;0,300;1,100;1,200;1,300&display=swap");
-.nav1, .menu li, .cart {
+.nav2, .nav2 .menu li, .cart {
   border-bottom: 1px solid #000; }
 
-.nav1 .toggle span {
+.nav2 .drawer .toggle span {
   border-top: 1px solid #000;
   border-bottom: 1px solid #000; }
+
+.nav {
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000; }
 
 #about, #store .main_img, #store .search_row, #contact .title {
   display: flex;
@@ -146,11 +150,8 @@ i {
   .header {
     padding: 0 10%; } }
 
-.nav1 {
+.nav2 {
   display: block;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   width: 100%;
   height: 70px;
   position: fixed;
@@ -158,124 +159,93 @@ i {
   left: 0;
   z-index: 101;
   background-color: #EAE0D7; }
-  .nav1 .toggle {
+  .nav2 .drawer {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 70px;
     padding: 0 5%;
     position: relative; }
-    .nav1 .toggle.active span:nth-child(1) {
+    .nav2 .drawer .toggle.active span:nth-child(1) {
       top: 30px;
       -webkit-transform: rotate(-45deg);
       -moz-transform: rotate(-45deg);
       transform: rotate(-45deg); }
-    .nav1 .toggle.active span:nth-child(2), .nav1 .toggle.active span:nth-child(3) {
+    .nav2 .drawer .toggle.active span:nth-child(2), .nav2 .drawer .toggle.active span:nth-child(3) {
       top: 30px;
       -webkit-transform: rotate(45deg);
       -moz-transform: rotate(45deg);
       transform: rotate(45deg); }
-    .nav1 .toggle span {
+    .nav2 .drawer .toggle span {
       width: 30px;
       display: block;
       position: absolute;
       -webkit-transition: .35s ease-in-out;
       -moz-transition: .35s ease-in-out;
       transition: .35s ease-in-out; }
-      .nav1 .toggle span:nth-child(1) {
+      .nav2 .drawer .toggle span:nth-child(1) {
         top: 20px; }
-      .nav1 .toggle span:nth-child(2) {
+      .nav2 .drawer .toggle span:nth-child(2) {
         top: 32px; }
-      .nav1 .toggle span:nth-child(3) {
+      .nav2 .drawer .toggle span:nth-child(3) {
         top: 45px; }
-    .nav1 .toggle div:last-child {
+    .nav2 .drawer h3:last-child {
       position: relative; }
-      .nav1 .toggle div:last-child span {
+      .nav2 .drawer h3:last-child span {
         position: absolute;
         top: -0.6em;
         left: -0.8em;
         font-size: small;
         color: #C6C0BC; }
-  .nav1 .fas {
-    font-size: 3em; }
-  .nav1 #laptop {
-    display: none; }
+  .nav2 .menu {
+    position: relative;
+    text-align: center;
+    transition: 0.5s ease;
+    background-color: #EAE0D7;
+    -webkit-transform: translateX(-110%);
+    z-index: 100; }
+    .nav2 .menu.open {
+      -webkit-transform: translateX(0%);
+      transform: translateX(0%); }
+    .nav2 .menu li {
+      font-size: 1.5em;
+      padding: 0.8em 0; }
+      .nav2 .menu li a {
+        display: block; }
+        .nav2 .menu li a:hover {
+          opacity: .5; }
 
-.menu {
-  position: relative;
-  text-align: center;
-  transition: 0.5s ease;
-  background-color: #EAE0D7;
-  -webkit-transform: translateX(-110%);
-  z-index: 100; }
-  .menu.open {
-    -webkit-transform: translateX(0%);
-    transform: translateX(0%); }
-  .menu li {
-    font-size: 1.5em;
-    padding: 0.8em 0; }
-    .menu li a {
-      display: block; }
-      .menu li a:hover {
-        opacity: .5; }
-
-@media (min-width: 768px) {
-  nav #mobile {
-    display: none; }
-  nav #laptop {
-    display: block;
-    display: flex; }
-    nav #laptop ul {
-      display: flex; }
-      nav #laptop ul li {
-        margin: 0 2.4em; } }
-
-.laptop_title {
+.nav {
   display: none;
-  margin: 0.6em 0; }
-
-.menu {
-  position: relative;
-  text-align: center;
-  transition: 0.5s ease;
-  background-color: #EAE0D7;
-  -webkit-transform: translateX(-110%);
-  z-index: 90; }
-  .menu.open {
-    -webkit-transform: translateX(0%);
-    transform: translateX(0%); }
-  .menu li {
-    font-size: 1.5em;
-    padding: 0.8em 0; }
-    .menu li a {
-      display: block; }
-      .menu li a:hover {
-        opacity: .5; }
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.4em 0; }
+  .nav ul:nth-child(2) {
+    display: flex; }
+    .nav ul:nth-child(2) li {
+      margin: 0 2.4em; }
+  .nav ul:last-child li {
+    position: relative; }
+    .nav ul:last-child li span {
+      position: absolute;
+      top: -0.6em;
+      left: -0.8em;
+      font-size: small;
+      color: #C6C0BC; }
+  .nav li {
+    font-size: 3em; }
+    .nav li a:hover {
+      opacity: .5; }
 
 @media (min-width: 768px) {
-  .laptop_title {
-    display: block;
-    margin: 0.6em 0;
-    position: relative; }
-  .nav1 {
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 2.4em 0;
-    border-top: 2px solid #000;
-    border-bottom: 2px solid #000; }
-    .nav1 div:nth-child(2) {
-      display: flex; }
-      .nav1 div:nth-child(2) li {
-        margin: 0 2.4em; }
-    .nav1 li {
-      font-size: 3em; }
-      .nav1 li a:hover {
-        opacity: .5; }
-    .nav1 #laptop {
-      display: block; }
-    .nav1 #mobile {
-      display: none; } }
+  .nav {
+    display: flex; }
+    .nav li {
+      font-size: 2.4em; } }
+
+@media (min-width: 1024px) {
+  .nav li {
+    font-size: 3em; } }
 
 .cart {
   display: none;

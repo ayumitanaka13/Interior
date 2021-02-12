@@ -22,52 +22,70 @@
 
     <!-- header -->
     <header class="header">
-      <h4 class="laptop_title">Première</h4>
-      
-      <!-- nav for laptop start -->
-      <nav class="nav1">
-        <!-- <div id="laptop"> -->
-          <div id="laptop">
+      <!-- nav for laptop -->
+      <!-- <h4>Première</h4>
+      <nav class="nav">
+        <ul>
+          <li>
             <a href="#home"><i class="fas fa-home"></i></a>
-          </div>
-          <div id="laptop">
-            <ul>
-              <li>
-                <a href="#about">About</a>
-              </li>
-              <li>
-                <a href="#store">Store</a>
-              </li>
-              <li>
-                <a href="#contact">Contact</a>
-              </li>
-            </ul>
-          </div>
-        <!-- </div> -->
-      <!-- nav for laptop end -->
-      <!-- nav for mobile start -->
-        <!-- <div id="mobile"> -->
-          <div id="mobile" class="toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div> 
-          <div>
-            <h4 id="mobile" class="mobile_title">
-              <a href="#home">Première</a>
-            </h4>
-          </div>
-        <!-- </div> -->
-      <!-- nav for mobile end -->
-          <div>
-            <span id="#sm_quantity">0</span>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a href="#about">About</a>
+          </li>
+          <li>
+            <a href="#store">Store</a>
+          </li>
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <span id="#sm_quantity"></span>
             <a href="#cart" class="shopping-cart">
               <i class="fas fa-shopping-cart"></i>
             </a>
-          </div>
-      </nav>
-      <!----------------------- cart inside ---------------------->
-      <div id="cart_items">
+          </li>
+        </ul>
+      </nav> -->
+      <!----------------------- cart laptop ---------------------->
+      <!-- <div id="cart_items">
+      </div>
+      <div id="cart" class="cart cart_total">
+        <ul> 
+          <li id="cart_total_price">
+            Total $ 0.00
+          </li>
+          <li id="cart_checkout">
+            <a href="#">checkout</a>
+          </li>
+        </ul>
+      </div> -->
+    </header>
+
+    <!-- nav for mobile -->
+    <nav class="nav2">
+      <div class="drawer">
+        <!-- hamburger--> 
+        <div class="toggle">
+        　　<span></span>
+        　　<span></span>
+        　　<span></span>
+        </div>
+        <h4>
+          <a href="#home">Première</a>
+        </h4>
+        <h3>
+          <span id="sm_quantity"></span>
+          <a href="#cart" class="shopping-cart">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
+        </h3>
+      </div>
+      <!----------------------- cart mobile ---------------------->
+      <div id="cart_items">   
       </div>
       <div id="cart" class="cart cart_total">
         <ul> 
@@ -79,28 +97,23 @@
           </li>
         </ul>
       </div>
-    </header>
+
 
       <!-- menu mobile -->
-
       <div class="menu" onclick="clickedMenu()">
-        <nav>
-          <ul>
-            <li>
-              <a href="#about">About</a>
-            </li>
-            <li>
-              <a href="#store">Store</a>
-            </li>
-            <li>
-              <a href="#contact">Contact</a>
-            </li>
-          </ul>
-        </nav>
+        <ul>
+          <li>
+            <a href="#about">About</a>
+          </li>
+          <li>
+            <a href="#store">Store</a>
+          </li>
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
+        </ul>
       </div>
-    <!-- </nav>
-    </header> -->
-
+    </nav>
 
     <!-- top section -->
     <section class="top">
