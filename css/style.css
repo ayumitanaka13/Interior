@@ -92,6 +92,18 @@ i {
 .hide {
   display: none; }
 
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4); }
+
 @media (min-width: 768px) {
   button {
     font-size: 1em; } }
@@ -171,10 +183,24 @@ i {
       left: -0.8em;
       font-size: small;
       color: #C6C0BC; }
+    .nav ul:last-child li #cart-count {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      font-size: 10px;
+      line-height: 10px;
+      background: #77726d;
+      color: #fff;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%; }
   .nav li {
     font-size: 3em; }
     .nav li a:hover {
-      opacity: .5; }
+      opacity: 0.5; }
 
 @media (min-width: 768px) {
   .nav {
@@ -216,9 +242,9 @@ i {
       width: 30px;
       display: block;
       position: absolute;
-      -webkit-transition: .35s ease-in-out;
-      -moz-transition: .35s ease-in-out;
-      transition: .35s ease-in-out; }
+      -webkit-transition: 0.35s ease-in-out;
+      -moz-transition: 0.35s ease-in-out;
+      transition: 0.35s ease-in-out; }
       .nav2 .drawer .toggle span:nth-child(1) {
         top: 20px; }
       .nav2 .drawer .toggle span:nth-child(2) {
@@ -233,6 +259,20 @@ i {
         left: -0.8em;
         font-size: small;
         color: #C6C0BC; }
+      .nav2 .drawer h3:last-child #cart-count-sm {
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        font-size: 10px;
+        line-height: 10px;
+        background: #77726d;
+        color: #fff;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%; }
   .nav2 .menu {
     position: relative;
     text-align: center;
@@ -249,7 +289,7 @@ i {
       .nav2 .menu li a {
         display: block; }
         .nav2 .menu li a:hover {
-          opacity: .5; }
+          opacity: 0.5; }
 
 @media (min-width: 768px) {
   .nav2 {
@@ -315,7 +355,7 @@ i {
 
 @media (min-width: 1024px) {
   .top {
-    margin-top: 48em; } }
+    margin-top: 32em; } }
 
 #store .main_img {
   background: url("../img/store.jpg");

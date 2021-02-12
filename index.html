@@ -18,6 +18,8 @@
 
 <body id="home">
 
+    <!-- Modal -->
+    <div id="theModal" class="modal"></div>
     <!-- Ayumi -->
 
     <!-- header -->
@@ -47,6 +49,7 @@
             <a href="#cart" class="shopping-cart">
               <i class="fas fa-shopping-cart"></i>
             </a>
+            <asp id="cart-count"/>0</a>
           </li>
         </ul>
       </nav>
@@ -82,10 +85,11 @@
           <a href="#cart" class="shopping-cart">
             <i class="fas fa-shopping-cart"></i>
           </a>
+          <asp id="cart-count-sm"/>0</a>
         </h3>
       </div>
       <!----------------------- cart mobile ---------------------->
-      <div id="cart_items">   
+      <div id="cart_items">
       </div>
       <div id="cart" class="cart cart_total">
         <ul> 
@@ -186,7 +190,7 @@
   
         <div class="info">
           <div>
-            <h6>info@companyname</h6>
+            <h6>info@remiere</h6>
             <h6>+1 604-000-0000</h6>
           </div>
           <div>
@@ -215,6 +219,7 @@
     <script src="https://kit.fontawesome.com/4538f04da3.js" crossorigin="anonymous"></script>
     <!-- index.js -->
     <script src="js/index.js"></script>
+    <script src="js/window.js"></script>
 
   </body>
 </html>
