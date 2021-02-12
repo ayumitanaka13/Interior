@@ -159,22 +159,6 @@ function findItem(searchItem) {
   console.log(filteredItems);
 }
 
-// search.addEventListener('input', function(e) {
-//   filterData(e.target.value);
-// });
-// function filterData(searchItem) {
-//   arr.forEach(item => {
-//       /* add conditional logic below */
-//       console.log(item);
-//     if (item.innerText.toLowerCase().includes(searchItem.toLowerCase())) {
-//           //remove the class of .hide
-//           item.classList.remove('hide');
-//       } else {
-//           //add the class of .hide
-//           item.classList.add('hide');
-//       }
-//   })
-// }
 
 // --------------------------- cart function ----------------------------
 
@@ -306,8 +290,6 @@ function updateCartQtyTotal() {
   // const cart_totals = document.querySelectorAll(".cart_total");
   const cart_total_prices = document.querySelectorAll("#cart_total_price");
   // const sm_quantity = document.querySelector("#sm_quantity");
-  // console.log(cart_totals);
-  // console.log(cart_total_prices);
 
   let total = 0.0;
   let quantity = 0;
@@ -316,33 +298,16 @@ function updateCartQtyTotal() {
   for (cart of carts) {
     const priceEl = cart.querySelector("#cart_price");
     const quantityEl = cart.querySelector("#cart_quantity");
-    // console.log(quantityEl);
-
-    // console.log(priceEl);
-    // console.log(quantityEl);
-
     const price = parseFloat(priceEl.textContent);
-    // console.log(price);
-
-    // for (q of quantityEls) {
-    //   quantity = q.value;
-    //   console.log(q);
-    //   console.log(quantity);
-    // }
 
     quantity = quantityEl.value;
 
-    // console.log(quantity);
-
     total = price * quantity;
-    // console.log(total);
 
     // cart_total += total;
-    // console.log(cart_total);
     // quantity += quantity;
     // document.querySelectorAll("#cart_total_price").innerText = `Total $ ${total}`;
 
-    // console.log(totalPriceEl);
     // totalPriceEl.innerText = `Total $ ${total}`;
   }
 
@@ -354,34 +319,14 @@ function updateCartQtyTotal() {
   //   quantityEls[0].value = quantityEls[1].value;
   // }
 
-  // for (q of quantityEls) {
-  //   console.log(q.value);
-  // }
-
-  // console.log(quantityEls[0].value);
-  // console.log(quantityEls[1].value);
-
-  // for (q of quantityEls) {
-  //   console.log(q.value);
-  // }
-
-  // total += price * quantity;
-  // console.log(total);
-
-  // quantity += quantity;
   document.querySelectorAll("#sm_quantity").textContent = `${quantity}`;
 
   total = Math.round(total * 100) / 100;
   // document.querySelectorAll("#cart_total_price").innerText = `Total $ ${total}`;
 
   for (cart_total_price of cart_total_prices) {
-    // console.log(total);
-    // console.log(cart_total_price.innerText);
 
     cart_total_price.innerText = `Total $ ${total}`;
-    // console.log(cart_total_price);
-    // total = total + cart_total_price;
-    // console.log(total);
   }
 
   // cart_total_price = total;
