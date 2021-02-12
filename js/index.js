@@ -5,11 +5,6 @@ $(function () {
   })
 })
 
-// const clickedMenu = () => {
-//   $(".toggle").toggleClass("active");
-//   $(".menu").removeClass("open");
-// }
-
 $('.shopping-cart').click(function () {
   $(this).toggleClass('on')
   $('.cart').slideToggle()
@@ -20,11 +15,6 @@ $('.shopping-cart').click(function () {
   }
 })
 
-// $("#store").click(function () {
-//   $(".shopping-cart").removeClass("on");
-//   $(".cart").slideToggle();
-// });
-
 // page slide
 const swiper = new Swiper('.swiper-container', {
   pagination: {
@@ -34,7 +24,7 @@ const swiper = new Swiper('.swiper-container', {
   },
 })
 
-//// api
+// api
 let responseData = []
 let tagsArr = []
 let arr = []
@@ -185,8 +175,10 @@ const cart_items = document.querySelectorAll('#cart_items')
 
 // change quantity
 const quantityInputs = document.querySelectorAll('#cart_quantity')
+// console.log(quantityInputs);
 for (let input of quantityInputs) {
-  input.addEventListener('change', quantityChanged)
+  //input.addEventListener('input', updateValue);
+  input.addEventListener('change', quantityChanged);
 }
 
 // click checkout
@@ -223,7 +215,7 @@ function quantityChanged(e) {
 
 // get clicked item
 function addToCart(data) {
-  console.log(data.id)
+  // console.log(data.id)
   if (cartArr.length <= 0) cartArr.push(data)
 
   const findById = cartArr.find((e) => e.id === data.id)
@@ -279,92 +271,40 @@ function addItemToCart(arr) {
 
 function updateCartQtyTotal() {
   const carts = document.querySelectorAll('#cart_item')
-  // const cart_totals = document.querySelectorAll(".cart_total");
   const cart_total_prices = document.querySelectorAll('#cart_total_price')
-  // const sm_quantity = document.querySelector("#sm_quantity");
-  // console.log(cart_totals);
-  // console.log(cart_total_prices);
 
   let total = 0.0
-  let quantity = 0
-  let cart_total = 0.0
+  // let quantity = 0
+  let total_quantity = 0
+  // let cart_total = 0.0
 
   for (cart of carts) {
     const priceEl = cart.querySelector('#cart_price')
     const quantityEl = cart.querySelector('#cart_quantity')
-    // console.log(quantityEl);
-
-    // console.log(priceEl);
-    // console.log(quantityEl);
+    // const quantityEls = cart.querySelectorAll('#cart_quantity')
+    // console.log(quantityEls);
 
     const price = parseFloat(priceEl.textContent)
-    // console.log(price);
+    // quantity = quantityEl.value
+    const quantity = quantityEl.value 
+    // quantityEl.setAttribute('value', quantityEl.value);
+    console.log(quantity)
+    // const quantity_s = quantityEls.value 
+    // console.log(quantity_s)
 
-    // for (q of quantityEls) {
-    //   quantity = q.value;
-    //   console.log(q);
-    //   console.log(quantity);
-    // }
 
-    quantity = quantityEl.value
-
-    // console.log(quantity);
-
-    total = price * quantity
-    // console.log(total);
-
-    // cart_total += total;
-    // console.log(cart_total);
-    // quantity += quantity;
-    // document.querySelectorAll("#cart_total_price").innerText = `Total $ ${total}`;
-
-    // console.log(totalPriceEl);
-    // totalPriceEl.innerText = `Total $ ${total}`;
+    total += price * quantity /2;
+    total_quantity += quantity /2;
   }
 
-  // to show same quantities on laptop and mobile
-  // const quantityEls = document.querySelectorAll("#cart_quantity");
-  // if (quantityEls[0].value > quantityEls[1].value) {
-  //   quantityEls[1].value = quantityEls[0].value;
-  // } else if (quantityEls[1].value > quantityEls[0].value) {
-  //   quantityEls[0].value = quantityEls[1].value;
-  // }
-
-  // for (q of quantityEls) {
-  //   console.log(q.value);
-  // }
-
-  // console.log(quantityEls[0].value);
-  // console.log(quantityEls[1].value);
-
-  // for (q of quantityEls) {
-  //   console.log(q.value);
-  // }
-
-  // total += price * quantity;
-  // console.log(total);
-
-  // quantity += quantity;
-  document.querySelectorAll('#sm_quantity').textContent = `${quantity}`
+  // console.log(total_quantity)
 
   total = Math.round(total * 100) / 100
-  // document.querySelectorAll("#cart_total_price").innerText = `Total $ ${total}`;
 
   for (cart_total_price of cart_total_prices) {
-    // console.log(total);
-    // console.log(cart_total_price.innerText);
-
-    cart_total_price.innerText = `Total $ ${total}`
-    // console.log(cart_total_price);
-    // total = total + cart_total_price;
-    // console.log(total);
+    cart_total_price.innerText = `Total $ ${total}.00`
   }
 
-  // cart_total_price = total;
-  // cart_total_price.innerText = `Total $ ${total}`;
-  // console.log(cart_total_price);
-  // total = total + cart_total_price;
-  // console.log(document.querySelectorAll("#cart_total_price"));
-
-  $('#cart-count').html(quantity)
+  $('#cart-count').html(total_quantity)
+  $('#cart-count-sm').html(total_quantity)
 }
