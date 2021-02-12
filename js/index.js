@@ -146,11 +146,9 @@ function showTags(datas) {
 
 // search item
 const search = document.querySelector('.search')
-
 search.addEventListener('input', function (e) {
   findItem(e.target.value)
 })
-
 function findItem(searchItem) {
   const filteredItems = responseData.filter((item) => {
     if (item.name.toLowerCase().includes(searchItem.toLowerCase())) {
@@ -165,13 +163,8 @@ function findItem(searchItem) {
       return
     }
   })
-  showItems(filteredItems)
-  console.log(filteredItems)
+  showItems(filteredItems);
 }
-
-// search.addEventListener('input', function(e) {
-//   filterData(e.target.value);
-// });
 // function filterData(searchItem) {
 //   arr.forEach(item => {
 //       /* add conditional logic below */
