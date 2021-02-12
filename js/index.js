@@ -24,7 +24,7 @@ const swiper = new Swiper('.swiper-container', {
   },
 })
 
-// api
+// ----------------------------- api --------------------------------
 let responseData = []
 let tagsArr = []
 let arr = []
@@ -43,20 +43,28 @@ async function getItems() {
 
 // showItems
 function showItems(datas) {
-  const iterate = datas.length / 6
-  let counter = 0
+  const apiData = datas
+  const size = 6
   const cardsWrapper = document.querySelector('.swiper-wrapper')
   cardsWrapper.innerHTML = ''
 
-  for (let i = 0; i < iterate; i++) {
-    //create the swipper-slide div
+  const chunkedArr = new Array(Math.ceil(apiData.length / size))
+    .fill('')
+    .map(function () {
+      return this.splice(0, size)
+    }, apiData.slice())
+
+  console.log(chunkedArr)
+
+
+  chunkedArr.forEach((box, index) => {
+
     const cards = document.createElement('div')
     cards.classList.add('swiper-slide')
     cards.classList.add('cards')
 
-    for (let j = 0; j < 6; j++) {
-      //create the card div to display each card
-      const { id, name, price, description, image_url } = datas[counter]
+    box.forEach((item, index) => {
+      const { id, name, price, description, image_url } = item;
       const card = document.createElement('div')
       card.classList.add('card')
       card.id = id
@@ -107,18 +115,16 @@ function showItems(datas) {
       card.appendChild(cardText)
       cards.appendChild(card)
       arr.push(card)
+    })
 
-      datas[counter]
-      counter++
-    }
     cardsWrapper.appendChild(cards)
-  }
+  })
   swiper.update()
 }
 
 // showTags
 function showTags(datas) {
-  let tags = []
+  let tags = [];
   datas.forEach((data) => {
     tagsArr.push(data.category)
     tags = tagsArr.filter(function (x, i, self) {
@@ -132,42 +138,40 @@ function showTags(datas) {
     btn.innerText = `# ${tag}`
     categories.append(btn)
   })
+
+  const tagButtons = document.querySelectorAll('.category');
+  for (let tagBtn of tagButtons) {
+    const clickedTag = tagBtn.innerText.replace('#', '').trim();
+    tagBtn.addEventListener('click', function(e) {
+      const clickedTag = e.target.innerText.replace('#', '').trim();
+      console.log(clickedTag);
+      findItem(clickedTag);
+    })    
+  }
 }
 
 // search item
 const search = document.querySelector('.search')
 search.addEventListener('input', function (e) {
-  findItem(e.target.value)
+  findItem(e.target.value);
 })
 function findItem(searchItem) {
   const filteredItems = responseData.filter((item) => {
     if (item.name.toLowerCase().includes(searchItem.toLowerCase())) {
-      return item
+      return true
     } else if (item.category.toLowerCase().includes(searchItem.toLowerCase())) {
-      return item
+      return true
     } else if (
       item.description.toLowerCase().includes(searchItem.toLowerCase())
     ) {
-      return item
+      return true
     } else {
-      return
+      return false
     }
   })
-  showItems(filteredItems);
+  showItems(filteredItems)
 }
-// function filterData(searchItem) {
-//   arr.forEach(item => {
-//       /* add conditional logic below */
-//       console.log(item);
-//     if (item.innerText.toLowerCase().includes(searchItem.toLowerCase())) {
-//           //remove the class of .hide
-//           item.classList.remove('hide');
-//       } else {
-//           //add the class of .hide
-//           item.classList.add('hide');
-//       }
-//   })
-// }
+
 
 // --------------------------- cart function ----------------------------
 
@@ -193,19 +197,18 @@ checkout.addEventListener('click', function () {
 
 // remove item from the cart
 function removeCartItem(itemId) {
-
   //remove item from global array
-  cartArr = cartArr.filter(product => product.id !== itemId)
+  cartArr = cartArr.filter((product) => product.id !== itemId)
 
   //remove item from each mobile/desktop cart_item div
   cart_items.forEach(() => {
-    $("#"+ itemId).remove();
+    $('#' + itemId).remove()
   })
   updateCartQtyTotal()
 }
 
 // change item quantity
-function quantityChanged(e) {
+function quantityChanged(itemId) {
   const inputNum = e.target
   if (isNaN(inputNum.value) || inputNum.value <= 0) {
     inputNum.value = 1
@@ -215,7 +218,6 @@ function quantityChanged(e) {
 
 // get clicked item
 function addToCart(data) {
-  // console.log(data.id)
   if (cartArr.length <= 0) cartArr.push(data)
 
   const findById = cartArr.find((e) => e.id === data.id)
@@ -237,7 +239,7 @@ function addItemToCart(arr) {
       const cart = document.createElement('div')
       cart.classList.add('cart')
       cart.classList.add('cart_item')
-      cart.id=product.id
+      cart.id = product.id
       const cartUL = document.createElement('ul')
 
       cartUL.id = 'cart_item'
@@ -269,8 +271,11 @@ function addItemToCart(arr) {
       const span_trash = document.createElement('span')
       span_trash.addEventListener('click', () => removeCartItem(product.id))
       span_trash.innerHTML = `<span><i class="fas fa-times"></i></span>`
-      cart_trash.appendChild(span_trash)
+      cart_trash.appendChild(span_trash);
 
+      // const quantityInputs = document.querySelector('#cart_quantity');
+      // quantityInputs.addEventListener('change', () => quantityChanged(product.id));
+  
       cartUL.appendChild(cart_trash)
       ele.appendChild(cart)
     })
@@ -284,6 +289,7 @@ function updateCartQtyTotal() {
   let total = 0.0
   // let quantity = 0
   let total_quantity = 0
+  let quantity = 0
   // let cart_total = 0.0
 
   for (cart of carts) {
