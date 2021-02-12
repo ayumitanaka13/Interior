@@ -2,7 +2,7 @@
 .nav2, .nav2 .menu li, .cart {
   border-bottom: 1px solid #000; }
 
-.nav2 .drawer .toggle span {
+.nav2 .drawer span {
   border-top: 1px solid #000;
   border-bottom: 1px solid #000; }
 
@@ -155,10 +155,14 @@ i {
     padding: 0 10%; } }
 
 .nav {
-  display: none;
   align-items: center;
+  flex-direction: row;
   justify-content: space-between;
   padding: 2.4em 0; }
+  .nav #laptop {
+    display: none; }
+  .nav div:first-child {
+    display: flex; }
   .nav ul:nth-child(2) {
     display: flex; }
     .nav ul:nth-child(2) li {
@@ -202,28 +206,28 @@ i {
     height: 70px;
     padding: 0 5%;
     position: relative; }
-    .nav2 .drawer .toggle.active span:nth-child(1) {
+    .nav2 .drawer.active span:nth-child(1) {
       top: 30px;
       -webkit-transform: rotate(-45deg);
       -moz-transform: rotate(-45deg);
       transform: rotate(-45deg); }
-    .nav2 .drawer .toggle.active span:nth-child(2), .nav2 .drawer .toggle.active span:nth-child(3) {
+    .nav2 .drawer.active span:nth-child(2), .nav2 .drawer.active span:nth-child(3) {
       top: 30px;
       -webkit-transform: rotate(45deg);
       -moz-transform: rotate(45deg);
       transform: rotate(45deg); }
-    .nav2 .drawer .toggle span {
+    .nav2 .drawer span {
       width: 30px;
       display: block;
       position: absolute;
       -webkit-transition: .35s ease-in-out;
       -moz-transition: .35s ease-in-out;
       transition: .35s ease-in-out; }
-      .nav2 .drawer .toggle span:nth-child(1) {
+      .nav2 .drawer span:nth-child(1) {
         top: 20px; }
-      .nav2 .drawer .toggle span:nth-child(2) {
+      .nav2 .drawer span:nth-child(2) {
         top: 32px; }
-      .nav2 .drawer .toggle span:nth-child(3) {
+      .nav2 .drawer span:nth-child(3) {
         top: 45px; }
     .nav2 .drawer h3:last-child {
       position: relative; }

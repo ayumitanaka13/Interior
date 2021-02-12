@@ -1,13 +1,19 @@
 .nav {
-    display: none;
+    // display: none;
+
+    #laptop {
+      display: none;
+    }
 
     align-items: center;
+    flex-direction: row;
     justify-content: space-between;
     padding: 2.4em 0;
     @extend %border-y-2;
 
     div:first-child {
         display: flex;
+        // justify-content: center;
     }
     
     ul:nth-child(2) {
