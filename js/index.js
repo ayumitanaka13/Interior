@@ -208,7 +208,14 @@ checkout.addEventListener('click', function () {
 
 // remove item from the cart
 function removeCartItem(itemId) {
-  $("#"+ itemId).remove();
+
+  //remove item from global array
+  cartArr = cartArr.filter(product => product.id !== itemId)
+
+  //remove item from each mobile/desktop cart_item div
+  cart_items.forEach(() => {
+    $("#"+ itemId).remove();
+  })
   updateCartQtyTotal()
 }
 
