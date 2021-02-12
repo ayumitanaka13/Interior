@@ -1,0 +1,35 @@
+// @media (min-width: 768px) {
+//   .nav1 {
+
+//     align-items: center;
+//     flex-direction: row;
+//     justify-content: space-between;
+//     padding: 2.4em 0;
+//     border-top: 2px solid $color-black;
+//     border-bottom: 2px solid $color-black;
+    
+//     div:nth-child(2) {
+//         display: flex;
+//         li {
+//             margin: 0 2.4em;
+//         }
+//     }
+//     li {
+//         font-size: 3em;
+//         a {
+//             &:hover {
+//                 opacity: .5;
+//             }
+//         }
+//     }
+
+//     #laptop {
+//       display: block;
+//     }
+
+//     #mobile {
+//       display: none;
+//     }
+//   }
+
+// }

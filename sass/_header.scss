@@ -1,5 +1,5 @@
 .header {
-    display: none;
+    // display: none;
     
     width: 100%;
 
@@ -14,14 +14,20 @@
     top: 0;
     left:0;
 
-    h4 {
+    .laptop_title {
+        display: none;
         margin: 0.6em 0;
     }
 }
 
 @media (min-width: 768px) {
     .header {
-        display: block;
+        // display: block;
+
+        // .laptop_title {
+        //     display: block;
+        //     margin: 0.6em 0;
+        // }
     }
 }
 
