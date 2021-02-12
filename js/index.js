@@ -54,9 +54,6 @@ function showItems(datas) {
       return this.splice(0, size)
     }, apiData.slice())
 
-  console.log(chunkedArr)
-
-
   chunkedArr.forEach((box, index) => {
 
     const cards = document.createElement('div')
@@ -144,7 +141,6 @@ function showTags(datas) {
     const clickedTag = tagBtn.innerText.replace('#', '').trim();
     tagBtn.addEventListener('click', function(e) {
       const clickedTag = e.target.innerText.replace('#', '').trim();
-      console.log(clickedTag);
       findItem(clickedTag);
     })    
   }
@@ -179,9 +175,7 @@ const cart_items = document.querySelectorAll('#cart_items')
 
 // change quantity
 const quantityInputs = document.querySelectorAll('#cart_quantity')
-// console.log(quantityInputs);
 for (let input of quantityInputs) {
-  //input.addEventListener('input', updateValue);
   input.addEventListener('change', quantityChanged);
 }
 
@@ -209,10 +203,23 @@ function removeCartItem(itemId) {
 
 // change item quantity
 function quantityChanged(itemId) {
-  const inputNum = e.target
-  if (isNaN(inputNum.value) || inputNum.value <= 0) {
-    inputNum.value = 1
-  }
+  cart_items.forEach((cart_item) => {
+    // console.log(cart_item);
+    const clickedId = cart_item.firstChild.id;
+    // console.log(clickedId);
+    // console.log(itemId);
+    if (clickedId == itemId) {
+      const cart_item_clicked = cart_item.firstChild.firstChild.firstChild.nextElementSibling.nextElementSibling.nextElementSibling;
+      
+      console.log(cart_item_clicked.childElement);
+      // console.log(cart_item);
+      }
+  })
+
+  // const inputNum = e.target
+  // if (isNaN(inputNum.value) || inputNum.value <= 0) {
+  //   inputNum.value = 1
+  // }
   updateCartQtyTotal()
 }
 
@@ -273,8 +280,10 @@ function addItemToCart(arr) {
       span_trash.innerHTML = `<span><i class="fas fa-times"></i></span>`
       cart_trash.appendChild(span_trash);
 
-      // const quantityInputs = document.querySelector('#cart_quantity');
-      // quantityInputs.addEventListener('change', () => quantityChanged(product.id));
+      const quantityInputs = document.querySelectorAll('#cart_quantity');
+      quantityInputs.forEach((quantityInput) => {
+        quantityInput.addEventListener('change', () => quantityChanged(product.id));
+      })
   
       cartUL.appendChild(cart_trash)
       ele.appendChild(cart)
@@ -287,34 +296,26 @@ function updateCartQtyTotal() {
   const cart_total_prices = document.querySelectorAll('#cart_total_price')
 
   let total = 0.0
-  // let quantity = 0
   let total_quantity = 0
   let quantity = 0
-  // let cart_total = 0.0
 
   for (cart of carts) {
     const priceEl = cart.querySelector('#cart_price')
     const quantityEl = cart.querySelector('#cart_quantity')
     const quantityEls = cart.querySelectorAll('#cart_quantity')
     for (q of quantityEls) {
-      console.log(q);
+      // console.log(q);
     }
     // console.log(quantityEls);
 
     const price = parseFloat(priceEl.textContent)
     // quantity = quantityEl.value
     const quantity = quantityEl.value
-    // quantityEl.setAttribute('value', quantityEl.value);
-    // console.log(quantity)
-    // const quantity_s = quantityEls.value 
-    // console.log(quantity_s)
 
 
     total += price * quantity /2;
     total_quantity += quantity /2;
   }
-
-  // console.log(total_quantity)
 
   total = Math.round(total * 100) / 100
 
