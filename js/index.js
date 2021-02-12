@@ -249,13 +249,21 @@ function addItemToCart(arr) {
             ${product.name}
           </li>
           <li>
-            <input id="cart_quantity" type="number" value="1">
+            <input id="cart_quantity" type="number" value="1" onChange="quantityChanged(event)">
           </li>
           <li>
             $ <span id="cart_price">${product.price}</span>
           </li>
       `
       cart.appendChild(cartUL)
+
+      // const quantityInputs = document.querySelectorAll('#cart_quantity')
+      // // console.log(quantityInputs);
+      // for (let input of quantityInputs) {
+      //   //input.addEventListener('input', updateValue);
+      //   input.addEventListener('change', quantityChanged);
+      // }
+
       const cart_trash = document.createElement('li')
       cartUL.appendChild(cart_trash)
       const span_trash = document.createElement('span')
@@ -281,14 +289,17 @@ function updateCartQtyTotal() {
   for (cart of carts) {
     const priceEl = cart.querySelector('#cart_price')
     const quantityEl = cart.querySelector('#cart_quantity')
-    // const quantityEls = cart.querySelectorAll('#cart_quantity')
+    const quantityEls = cart.querySelectorAll('#cart_quantity')
+    for (q of quantityEls) {
+      console.log(q);
+    }
     // console.log(quantityEls);
 
     const price = parseFloat(priceEl.textContent)
     // quantity = quantityEl.value
-    const quantity = quantityEl.value 
+    const quantity = quantityEl.value
     // quantityEl.setAttribute('value', quantityEl.value);
-    console.log(quantity)
+    // console.log(quantity)
     // const quantity_s = quantityEls.value 
     // console.log(quantity_s)
 
