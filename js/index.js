@@ -1,3 +1,4 @@
+// menu open
 $(function () {
   $(".toggle").click(function () {
     $(this).toggleClass("active");
@@ -5,21 +6,11 @@ $(function () {
   });
 });
 
-const clickedMenu = () => {
-  $(".toggle").toggleClass("active");
-  $(".menu").removeClass("open");
-}
-
-
+// cart open
 $(".shopping-cart").click(function () {
   $(this).toggleClass("on");
   $(".cart").slideToggle();
 });
-
-// $("#store").click(function () {
-//   $(".shopping-cart").removeClass("on");
-//   $(".cart").slideToggle();
-// });
 
 // page slide
 const swiper = new Swiper('.swiper-container', {
@@ -32,8 +23,6 @@ const swiper = new Swiper('.swiper-container', {
 
 //// api
 let responseData = [];
-let tagsArr = [];
-let arr = [];
 getItems();
 
 // getItems
@@ -106,11 +95,9 @@ function showItems(datas) {
         
         card.appendChild(cardText)
         cards.appendChild(card);
-        arr.push(card);
               
         datas[counter];
-        counter++;
-        
+        counter++
       }
       cardsWrapper.appendChild(cards);
     }
@@ -119,30 +106,46 @@ function showItems(datas) {
 
 // showTags
 function showTags(datas) {
-  let tags = [];
   datas.forEach((data) => {
-    tagsArr.push(data.category);
-    tags = tagsArr.filter(function (x, i, self) {
-      return self.indexOf(x) === i;
-    })
-  })
-  tags.forEach((tag) => {
+    const {category} = data;
     const categories = document.querySelector('.categories');
     const btn = document.createElement('button');
-    btn.classList.add('category');
-    btn.innerText = `# ${tag}`;
-    categories.append(btn);
-});
+
+    btn.innerText = `# ${category}`;
+    categories.appendChild(btn);
+  });
 }
 
 // search item
+// searching input
 const search = document.querySelector('.search');
 
 search.addEventListener('input', function(e) {
   findItem(e.target.value);
 });
 
+// function findItem(searchItem) {
+
+//   const filteredItems = responseData.filter((item) => {
+//     if (item.name.toLowerCase().includes(searchItem.toLowerCase())) {
+//       return item;
+//     } else if (item.category.toLowerCase().includes(searchItem.toLowerCase())){
+//       return item;
+//     } else if (item.description.toLowerCase().includes(searchItem.toLowerCase())) {
+//       return item;
+//     } else {
+//       return;
+//     }
+//   })
+//   showItems(filteredItems);
+// }
+
+// search tag
+const tag = document.querySelector('button');
+console.log(tag)
+
 function findItem(searchItem) {
+
   const filteredItems = responseData.filter((item) => {
     if (item.name.toLowerCase().includes(searchItem.toLowerCase())) {
       return item;
@@ -155,30 +158,13 @@ function findItem(searchItem) {
     }
   })
   showItems(filteredItems);
-  console.log(filteredItems);
-}
 
-// search.addEventListener('input', function(e) {
-//   filterData(e.target.value);
-// });
-// function filterData(searchItem) {
-//   arr.forEach(item => {
-//       /* add conditional logic below */
-//       console.log(item);
-//     if (item.innerText.toLowerCase().includes(searchItem.toLowerCase())) {
-//           //remove the class of .hide
-//           item.classList.remove('hide');
-//       } else {
-//           //add the class of .hide
-//           item.classList.add('hide');
-//       }
-//   })
-// }
+}
 
 
 // --------------------------- cart function ----------------------------
 
-const cart_items = document.querySelectorAll("#cart_items");
+const cart_items = document.querySelector("#cart_items");
 
 // remove a item 
 const removeItemButtons = document.querySelectorAll("#cart_trash");
@@ -191,6 +177,7 @@ const quantityInputs = document.querySelectorAll("#cart_quantity");
 for (let input of quantityInputs) {
   input.addEventListener("change", quantityChanged);
 }
+
 
 // click checkout
 const checkout = document.querySelector('#cart_checkout');
@@ -209,13 +196,9 @@ function removeCartItem(e) {
   updateCartQtyTotal();
 }
 
-
 // change item quantity
 function quantityChanged(e) {
   const inputNum = e.target;
-  console.log(inputNum);
-  const cartItemTitle = inputNum.parentElement.previousElementSibling;
-  console.log(cartItemTitle);
   if (isNaN(inputNum.value) || inputNum.value <= 0) {
     inputNum.value = 1;
   }
@@ -235,6 +218,10 @@ function addToCart(e) {
 
 // add clicked item to cart
 function addItemToCart(title, price, imageSrc) {
+
+  const cart = document.createElement("div");
+  cart.classList.add("cart");
+
   // to get what inside of cart
   const cartItemNames = document.querySelectorAll("#cart_item_title");
   for (let cartItemName of cartItemNames) {
@@ -244,90 +231,59 @@ function addItemToCart(title, price, imageSrc) {
     }
   }
 
-  // to create cart_item for laptop and mobile
-  for (cart_item of cart_items) {
-    const cart = document.createElement('div');
-    cart.classList.add('cart');
-    cart.innerHTML = `
-      <ul id="cart_item"> 
-        <li id="cart_item_img">
-          <img src="${imageSrc} alt="${title}">
-        </li>
-        <li id="cart_item_title">
-          ${title}
-        </li>
-        <li>
-          <input id="cart_quantity" type="number" value="1">
-        </li>
-        <li>
-          $ <span id="cart_price">${price}</span>
-        </li>
-        <li id="cart_trash">
-          <a href="#"><i class="fas fa-times"></i></a>
-        </li>
-      </ul>
-    `;
-    cart_item.appendChild(cart);    
-  }
+  cart.innerHTML = `
+    <ul id="cart_item"> 
+      <li id="cart_item_img">
+        <img src="${imageSrc} alt="${title}">
+      </li>
+      <li id="cart_item_title">
+        ${title}
+      </li>
+      <li>
+        <input id="cart_quantity" type="number" value="1">
+      </li>
+      <li>
+        $ <span id="cart_price">${price}</span>
+      </li>
+      <li id="cart_trash">
+        <a href="#"><i class="fas fa-times"></i></a>
+      </li>
+    </ul>
+  `;
 
-  const cart_trashes = document.querySelectorAll("#cart_trash");
-  const cart_quantities = document.querySelectorAll("#cart_quantity");
+  cart_items.append(cart);
+  // div.appendChild(ul);
 
-  // to add remove func for laptop and mobile
-  for (cart_trash of cart_trashes) {
-    cart_trash.addEventListener("click", removeCartItem);
-  }
-  // to add quantity func for laptop and mobile
-  for (cart_quantity of cart_quantities) {
-    cart_quantity.addEventListener("change", quantityChanged);
-  }
+  // 親となる要素ノード.insertBefore(挿入するノード, 子ノード);
+  // const cart_total = document.querySelector('.cart_total');
+  // cart_items.insertBefore(cart, cart_total);
+
+  cart
+    .querySelector("#cart_trash")
+    .addEventListener("click", removeCartItem);
+  cart
+    .querySelector("#cart_quantity")
+    .addEventListener("change", quantityChanged);
 }
-
 
 function updateCartQtyTotal() {
   const carts = document.querySelectorAll("#cart_item");
-  // const cart_totals = document.querySelectorAll(".cart_total");
-  const cart_total_prices = document.querySelectorAll("#cart_total_price");
   // const sm_quantity = document.querySelector("#sm_quantity");
 
   let total = 0.00;
   let quantity = 0;
-
-  for (cart of carts) {
+  for (let cart of carts) {
     const priceEl = cart.querySelector("#cart_price");
     const quantityEl = cart.querySelector("#cart_quantity");
-
     const price = parseFloat(priceEl.textContent);
     quantity = quantityEl.value;
-    total += price * quantity / 2;
+    total += price * quantity;
+    // quantity += quantity;
   }
+  // quantity += quantity;
   document.querySelectorAll("#sm_quantity").textContent = `${quantity}`;
 
   total = Math.round(total * 100) / 100;
-  // document.querySelectorAll("#cart_total_price").innerText = `Total $ ${total}`;
-  
-  for (cart_total_price of cart_total_prices) {  
-    cart_total_price.innerText = `Total $ ${total}`;  
-  }
-}
+  document.querySelector("#cart_total_price").innerText = `Total $ ${total}`;
 
- // to show same quantities on laptop and mobile
-//  const quantityEls = document.querySelectorAll("#cart_quantity");
-//  for (let quantityEl of quantityEls) {
-//    quantityEl.addEventListener("change", function() {
-//      quantityEl[0] = quantityEl[1];
-//    });
-//  } 
- // if (quantityEls[0].value > quantityEls[1].value) {
- //   quantityEls[1].value = quantityEls[0].value;
- // } else if (quantityEls[1].value > quantityEls[0].value) {
- //   quantityEls[0].value = quantityEls[1].value;
- // }
-
- // change quantity 
-const quantityEls = document.querySelectorAll("#cart_quantity");
-for (let quantityEl of quantityEls) {
-  quantityEl.addEventListener("change", function() {
-    quantityEl[0] = quantityEl[1];
-  });
 }

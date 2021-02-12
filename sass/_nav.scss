@@ -5,6 +5,10 @@
     justify-content: space-between;
     padding: 2.4em 0;
     @extend %border-y-2;
+
+    div:first-child {
+        display: flex;
+    }
     
     ul:nth-child(2) {
         display: flex;
