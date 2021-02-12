@@ -24,7 +24,7 @@ const swiper = new Swiper('.swiper-container', {
   },
 })
 
-//// api
+// ----------------------------- api --------------------------------
 let responseData = []
 let tagsArr = []
 let arr = []
@@ -43,20 +43,28 @@ async function getItems() {
 
 // showItems
 function showItems(datas) {
-  const iterate = datas.length / 6
-  let counter = 0
+  const apiData = datas
+  const size = 6
   const cardsWrapper = document.querySelector('.swiper-wrapper')
   cardsWrapper.innerHTML = ''
 
-  for (let i = 0; i < iterate; i++) {
-    //create the swipper-slide div
+  const chunkedArr = new Array(Math.ceil(apiData.length / size))
+    .fill('')
+    .map(function () {
+      return this.splice(0, size)
+    }, apiData.slice())
+
+  console.log(chunkedArr)
+
+
+  chunkedArr.forEach((box, index) => {
+
     const cards = document.createElement('div')
     cards.classList.add('swiper-slide')
     cards.classList.add('cards')
 
-    for (let j = 0; j < 6; j++) {
-      //create the card div to display each card
-      const { id, name, price, description, image_url } = datas[counter]
+    box.forEach((item, index) => {
+      const { id, name, price, description, image_url } = item;
       const card = document.createElement('div')
       card.classList.add('card')
       card.id = id
@@ -107,12 +115,10 @@ function showItems(datas) {
       card.appendChild(cardText)
       cards.appendChild(card)
       arr.push(card)
+    })
 
-      // datas[counter]
-      counter++
-    }
     cardsWrapper.appendChild(cards)
-  }
+  })
   swiper.update()
 }
 
@@ -136,22 +142,18 @@ function showTags(datas) {
   const tagButtons = document.querySelectorAll('.category');
   for (let tagBtn of tagButtons) {
     const clickedTag = tagBtn.innerText.replace('#', '').trim();
-    // console.log(result);
     tagBtn.addEventListener('click', function(e) {
       const clickedTag = e.target.innerText.replace('#', '').trim();
       console.log(clickedTag);
       findItem(clickedTag);
-      // filterData(clickedTag);
     })    
   }
 }
-
 
 // search item
 const search = document.querySelector('.search')
 search.addEventListener('input', function (e) {
   findItem(e.target.value);
-  // filterData(e.target.value);
 })
 
 function findItem(searchItem) {
@@ -168,22 +170,9 @@ function findItem(searchItem) {
       return false
     }
   })
-  // console.log(filteredItems);
-  showItems(filteredItems);
+  showItems(filteredItems)
 }
-// function filterData(searchItem) {
-//   arr.forEach(item => {
-//       /* add conditional logic below */
-//       // console.log(item);
-//     if (item.innerText.toLowerCase().includes(searchItem.toLowerCase())) {
-//           //remove the class of .hide
-//           item.classList.remove('hide');
-//       } else {
-//           //add the class of .hide
-//           item.classList.add('hide');
-//       }
-//   })
-// }
+
 
 // --------------------------- cart function ----------------------------
 
@@ -207,13 +196,12 @@ checkout.addEventListener('click', function () {
 
 // remove item from the cart
 function removeCartItem(itemId) {
-
   //remove item from global array
-  cartArr = cartArr.filter(product => product.id !== itemId)
+  cartArr = cartArr.filter((product) => product.id !== itemId)
 
   //remove item from each mobile/desktop cart_item div
   cart_items.forEach(() => {
-    $("#"+ itemId).remove();
+    $('#' + itemId).remove()
   })
   updateCartQtyTotal()
 }
@@ -250,7 +238,7 @@ function addItemToCart(arr) {
       const cart = document.createElement('div')
       cart.classList.add('cart')
       cart.classList.add('cart_item')
-      cart.id=product.id
+      cart.id = product.id
       const cartUL = document.createElement('ul')
 
       cartUL.id = 'cart_item'
