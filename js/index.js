@@ -155,12 +155,9 @@ function findItem(searchItem) {
     }
   })
   showItems(filteredItems);
-  console.log(filteredItems);
+  // console.log(filteredItems);
 }
 
-// search.addEventListener('input', function(e) {
-//   filterData(e.target.value);
-// });
 // function filterData(searchItem) {
 //   arr.forEach(item => {
 //       /* add conditional logic below */
