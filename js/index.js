@@ -204,43 +204,6 @@ function removeCartItem(itemId) {
 // change item quantity
 function quantityChanged(itemId) {
 
-  // console.log(cart_items);
-  let laptop_id = cart_items[0].firstChild.id;
-  let mobile_id = cart_items[1].firstChild.id;
-  const laptop_content = cart_items[0].firstChild.firstChild.firstChild.nextElementSibling.nextElementSibling.nextElementSibling;
-  const mobile_content = cart_items[1].firstChild.firstChild.firstChild.nextElementSibling.nextElementSibling.nextElementSibling;
-  let laptop_value = laptop_content.querySelector('input').value;
-  let mobile_value = mobile_content.querySelector('input').value;
-
-  const changeValue = (val) => {
-    for (cart_item of cart_items) {
-      const cart_li = cart_item.firstChild.firstChild.firstChild.nextElementSibling.nextElementSibling.nextElementSibling;
-      cart_li.innerHTML = "";
-      cart_li.innerHTML = `<input id="cart_quantity" type="number" value="${val}" onChange="quantityChanged(event)">`;
-    }
-  }
-
-  let currentVal = 1;
-  if (laptop_id === mobile_id) {
-    if (laptop_value > mobile_value) {
-      currentVal = laptop_value; //3
-      changeValue(currentVal);
-    } else if (mobile_value > currentVal) {
-      currentVal = mobile_value; //6
-      changeValue(currentVal);
-    } else if (laptop_value < currentVal) {
-      currentVal = laptop_value;
-      changeValue(currentVal);
-    } else if (mobile_value < currentVal) {
-      currentVal = mobile_value; //1
-      changeValue(currentVal);
-    }
-  }
-  
-  console.log("currentVal:", currentVal);
-  console.log("laptop:", laptop_value);
-  console.log("mobile:", mobile_value);
-
   cart_items.forEach((cart_item) => {
     const clickedId = cart_item.firstChild.id;
     if (clickedId == itemId) {
@@ -249,21 +212,10 @@ function quantityChanged(itemId) {
 
       const cart_item_clicked = cart_item.firstChild.firstChild.firstChild.nextElementSibling.nextElementSibling.nextElementSibling;
       const cart_item_clicked_value = cart_item_clicked.querySelector('input').value;
-      // console.log(cart_item_clicked_value);
-
-      // const cart_item_clicked_inputs = cart_item_clicked.querySelectorAll('input');
-      // console.log(cart_item_clicked_inputs);
-      // for (i of cart_item_clicked_inputs) {     
-      //   console.log(i.value);
-      // }
 
     }
   })
 
-  // const inputNum = e.target
-  // if (isNaN(inputNum.value) || inputNum.value <= 0) {
-  //   inputNum.value = 1
-  // }
   updateCartQtyTotal()
 }
 
@@ -309,13 +261,6 @@ function addItemToCart(arr) {
           </li>
       `
       cart.appendChild(cartUL)
-
-      // const quantityInputs = document.querySelectorAll('#cart_quantity')
-      // // console.log(quantityInputs);
-      // for (let input of quantityInputs) {
-      //   //input.addEventListener('input', updateValue);
-      //   input.addEventListener('change', quantityChanged);
-      // }
 
       const cart_trash = document.createElement('li')
       cartUL.appendChild(cart_trash)
