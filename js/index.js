@@ -55,13 +55,12 @@ function showItems(datas) {
     }, apiData.slice())
 
   chunkedArr.forEach((box, index) => {
-
     const cards = document.createElement('div')
     cards.classList.add('swiper-slide')
     cards.classList.add('cards')
 
     box.forEach((item, index) => {
-      const { id, name, price, description, image_url } = item;
+      const { id, name, price, description, image_url } = item
       const card = document.createElement('div')
       card.classList.add('card')
       card.id = id
@@ -84,8 +83,8 @@ function showItems(datas) {
 
       // add clicked item to cart
       shoppingCart.addEventListener('click', (e) => {
-        e.stopPropagation()
         addToCart({ id, name, price, description, image_url })
+        e.stopPropagation()
       })
 
       const priceSign = document.createElement('h6')
@@ -121,7 +120,7 @@ function showItems(datas) {
 
 // showTags
 function showTags(datas) {
-  let tags = [];
+  let tags = []
   datas.forEach((data) => {
     tagsArr.push(data.category)
     tags = tagsArr.filter(function (x, i, self) {
@@ -136,20 +135,20 @@ function showTags(datas) {
     categories.append(btn)
   })
 
-  const tagButtons = document.querySelectorAll('.category');
+  const tagButtons = document.querySelectorAll('.category')
   for (let tagBtn of tagButtons) {
-    const clickedTag = tagBtn.innerText.replace('#', '').trim();
-    tagBtn.addEventListener('click', function(e) {
-      const clickedTag = e.target.innerText.replace('#', '').trim();
-      findItem(clickedTag);
-    })    
+    const clickedTag = tagBtn.innerText.replace('#', '').trim()
+    tagBtn.addEventListener('click', function (e) {
+      const clickedTag = e.target.innerText.replace('#', '').trim()
+      findItem(clickedTag)
+    })
   }
 }
 
 // search item
 const search = document.querySelector('.search')
 search.addEventListener('input', function (e) {
-  findItem(e.target.value);
+  findItem(e.target.value)
 })
 function findItem(searchItem) {
   const filteredItems = responseData.filter((item) => {
@@ -168,7 +167,6 @@ function findItem(searchItem) {
   showItems(filteredItems)
 }
 
-
 // --------------------------- cart function ----------------------------
 
 const cart_items = document.querySelectorAll('#cart_items')
@@ -176,7 +174,7 @@ const cart_items = document.querySelectorAll('#cart_items')
 // change quantity
 const quantityInputs = document.querySelectorAll('#cart_quantity')
 for (let input of quantityInputs) {
-  input.addEventListener('change', quantityChanged);
+  input.addEventListener('change', quantityChanged)
 }
 
 // click checkout
@@ -203,29 +201,94 @@ function removeCartItem(itemId) {
 
 // change item quantity
 function quantityChanged(itemId) {
+  const itemFoundById = cartArr.find((item) => item.id === itemId)
+  if (itemFoundById) {
+    itemFoundById.quantity = $( "input[id='cart_quantity']" ).val()
+    cartArr.map((ele) => {
+      if(ele.id === itemId) {
+        return {
+          ...ele,
+          itemFoundById
+        }
+      }
+    })
+    cart_items.forEach(() => {
+      if( $('#' + itemId)){
+        $( "input[id='cart_quantity']" ).val(itemFoundById.quantity)
+      }
+    })
+  }
 
-  cart_items.forEach((cart_item) => {
-    const clickedId = cart_item.firstChild.id;
-    if (clickedId == itemId) {
+  // console.log(cart_items);
+  // let laptop_id = cart_items[0].firstChild.id;
+  // let mobile_id = cart_items[1].firstChild.id;
+  // const laptop_content = cart_items[0].firstChild.firstChild.firstChild.nextElementSibling.nextElementSibling.nextElementSibling;
+  // const mobile_content = cart_items[1].firstChild.firstChild.firstChild.nextElementSibling.nextElementSibling.nextElementSibling;
+  // let laptop_value = laptop_content.querySelector('input').value;
+  // let mobile_value = mobile_content.querySelector('input').value;
 
-      // console.log(cart_item);
+  // const changeValue = (val) => {
+  //   for (cart_item of cart_items) {
+  //     const cart_li = cart_item.firstChild.firstChild.firstChild.nextElementSibling.nextElementSibling.nextElementSibling;
+  //     cart_li.innerHTML = "";
+  //     cart_li.innerHTML = `<input id="cart_quantity" type="number" value="${val}" onChange="quantityChanged(event)">`;
+  //   }
+  // }
 
-      const cart_item_clicked = cart_item.firstChild.firstChild.firstChild.nextElementSibling.nextElementSibling.nextElementSibling;
-      const cart_item_clicked_value = cart_item_clicked.querySelector('input').value;
+  // let currentVal = 1;
+  // if (laptop_id === mobile_id) {
+  //   if (laptop_value > mobile_value) {
+  //     currentVal = laptop_value; //3
+  //     changeValue(currentVal);
+  //   } else if (mobile_value > currentVal) {
+  //     currentVal = mobile_value; //6
+  //     changeValue(currentVal);
+  //   } else if (laptop_value < currentVal) {
+  //     currentVal = laptop_value;
+  //     changeValue(currentVal);
+  //   } else if (mobile_value < currentVal) {
+  //     currentVal = mobile_value; //1
+  //     changeValue(currentVal);
+  //   }
+  // }
 
-    }
-  })
+  // console.log("currentVal:", currentVal);
+  // console.log("laptop:", laptop_value);
+  // console.log("mobile:", mobile_value);
 
+  // cart_items.forEach((cart_item) => {
+  //   const clickedId = cart_item.firstChild.id;
+  //   if (clickedId == itemId) {
+
+  //     // console.log(cart_item);
+
+  //     const cart_item_clicked = cart_item.firstChild.firstChild.firstChild.nextElementSibling.nextElementSibling.nextElementSibling;
+  //     const cart_item_clicked_value = cart_item_clicked.querySelector('input').value;
+  //     // console.log(cart_item_clicked_value);
+
+  //     // const cart_item_clicked_inputs = cart_item_clicked.querySelectorAll('input');
+  //     // console.log(cart_item_clicked_inputs);
+  //     // for (i of cart_item_clicked_inputs) {
+  //     //   console.log(i.value);
+  //     // }
+
+  //   }
+  // })
+
+  // const inputNum = e.target
+  // if (isNaN(inputNum.value) || inputNum.value <= 0) {
+  //   inputNum.value = 1
+  // }
   updateCartQtyTotal()
 }
 
 // get clicked item
 function addToCart(data) {
-  if (cartArr.length <= 0) cartArr.push(data)
+  if (cartArr.length <= 0) cartArr.push({ ...data, quantity: 1 })
 
   const findById = cartArr.find((e) => e.id === data.id)
   if (!findById) {
-    cartArr.push(data)
+    cartArr.push({ ...data, quantity: 1 })
   }
   addItemToCart(cartArr)
   updateCartQtyTotal()
@@ -254,7 +317,7 @@ function addItemToCart(arr) {
             ${product.name}
           </li>
           <li>
-            <input id="cart_quantity" type="number" value="1" onChange="quantityChanged(event)">
+            <input id="cart_quantity" type="number" value="${product.quantity}" onChange="quantityChanged(event)">
           </li>
           <li>
             $ <span id="cart_price">${product.price}</span>
@@ -262,18 +325,27 @@ function addItemToCart(arr) {
       `
       cart.appendChild(cartUL)
 
+      // const quantityInputs = document.querySelectorAll('#cart_quantity')
+      // // console.log(quantityInputs);
+      // for (let input of quantityInputs) {
+      //   //input.addEventListener('input', updateValue);
+      //   input.addEventListener('change', quantityChanged);
+      // }
+
       const cart_trash = document.createElement('li')
       cartUL.appendChild(cart_trash)
       const span_trash = document.createElement('span')
       span_trash.addEventListener('click', () => removeCartItem(product.id))
       span_trash.innerHTML = `<span><i class="fas fa-times"></i></span>`
-      cart_trash.appendChild(span_trash);
+      cart_trash.appendChild(span_trash)
 
-      const quantityInputs = document.querySelectorAll('#cart_quantity');
+      const quantityInputs = document.querySelectorAll('#cart_quantity')
       quantityInputs.forEach((quantityInput) => {
-        quantityInput.addEventListener('change', () => quantityChanged(product.id));
+        quantityInput.addEventListener('change', () =>
+          quantityChanged(product.id)
+        )
       })
-  
+
       cartUL.appendChild(cart_trash)
       ele.appendChild(cart)
     })
@@ -301,9 +373,8 @@ function updateCartQtyTotal() {
     // quantity = quantityEl.value
     const quantity = quantityEl.value
 
-
-    total += price * quantity /2;
-    total_quantity += quantity /2;
+    total += (price * quantity) / 2
+    total_quantity += quantity / 2
   }
 
   total = Math.round(total * 100) / 100
