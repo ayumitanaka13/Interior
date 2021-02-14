@@ -202,46 +202,26 @@ function removeCartItem(itemId) {
 
 // change item quantity
 function quantityChanged(itemId) {
-
-  const clickedItem = document.querySelector(`[id='${itemId}']`);
-  let clickedItem_val = clickedItem.querySelector('#cart_quantity').value;
-  // console.log('clickedItem_val', clickedItem_val);
-
   for (cart_item of cart_items) {
-
+    const clickedItem = document.querySelector(`[id='${itemId}']`);
+    let clickedItem_val = clickedItem.querySelector('#cart_quantity').value;
     const item_ids = cart_item.querySelectorAll('.cart_item');
-    // const item_vals = cart_item.querySelectorAll('#cart_quantity');
-
+    // to avoid enter less than 0
+    if (clickedItem_val < 0) {
+      clickedItem_val = 1;
+    }
+    // iterate through cart_item's id for laptop and mobile
     for (item_id of item_ids) {
-      // const sameIdItem = document.getElementById(`${item_id.id}`);
-      // const sameIdItem = cart_item.querySelector(`[id='${item_id.id}']`);
-      // let sameIdItem_val = sameIdItem.querySelector('#cart_quantity').value;
-      // console.log("sameIdItem", sameIdItem);
-      // console.log("clickedItemVal", clickedItem_val);
-      const item_vals = item_id.querySelectorAll('#cart_quantity');
-      if (itemId == item_id.id) {
-
-        // sameIdItem_val = clickedItem_val;
-        // console.log("sameIdItemVal", sameIdItem_val);
-        // console.log("just id", item_id.id);
-        // console.log("item id", itemId);
-        // for (s of sameIdItem) {
-        //   let sameIdItem_val = s.querySelector('#cart_quantity').value;
-        //   console.log("sameIdItemVal", sameIdItem_val);
-        //   sameIdItem_val = clickedItem_val;
-        // }
-
-        // sameIdItem_val = clickedItem_val;
+      // if clicked item's id is equal to cart_item's id, make same quantity as input value 
+      if (item_id.id == itemId) {
+        const item_vals = item_id.querySelectorAll('#cart_quantity');
+        // iterate through cart_item's id value laptop and mobile
         for (item_val of item_vals) {
-        
           item_val.value = clickedItem_val;
-          // console.log("just val", item_val.value);
-          // console.log("item val", clickedItem_val);
         }
       }
     }
   }
-
   updateCartQtyTotal()
 }
 
