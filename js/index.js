@@ -210,17 +210,19 @@ function quantityChanged(itemId) {
   for (cart_item of cart_items) {
 
     const item_ids = cart_item.querySelectorAll('.cart_item');
-    const item_vals = cart_item.querySelectorAll('#cart_quantity');
+    // const item_vals = cart_item.querySelectorAll('#cart_quantity');
 
     for (item_id of item_ids) {
       // const sameIdItem = document.getElementById(`${item_id.id}`);
-      const sameIdItem = cart_item.querySelector(`[id='${item_id.id}']`);
-      let sameIdItem_val = sameIdItem.querySelector('#cart_quantity').value;
+      // const sameIdItem = cart_item.querySelector(`[id='${item_id.id}']`);
+      // let sameIdItem_val = sameIdItem.querySelector('#cart_quantity').value;
       // console.log("sameIdItem", sameIdItem);
       // console.log("clickedItemVal", clickedItem_val);
+      const item_vals = item_id.querySelectorAll('#cart_quantity');
       if (itemId == item_id.id) {
-        sameIdItem_val = clickedItem_val;
-        console.log("sameIdItemVal", sameIdItem_val);
+
+        // sameIdItem_val = clickedItem_val;
+        // console.log("sameIdItemVal", sameIdItem_val);
         // console.log("just id", item_id.id);
         // console.log("item id", itemId);
         // for (s of sameIdItem) {
@@ -230,11 +232,12 @@ function quantityChanged(itemId) {
         // }
 
         // sameIdItem_val = clickedItem_val;
-        // for (item_val of item_vals) {
-        //   item_val.value = clickedItem_val;
-        //   // console.log("just val", item_val.value);
-        //   // console.log("item val", clickedItem_val);
-        // }
+        for (item_val of item_vals) {
+        
+          item_val.value = clickedItem_val;
+          // console.log("just val", item_val.value);
+          // console.log("item val", clickedItem_val);
+        }
       }
     }
   }
