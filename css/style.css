@@ -68,6 +68,8 @@ a {
   color: #000;
   text-decoration: none;
   cursor: pointer; }
+  a:hover {
+    opacity: 0.5; }
 
 li {
   list-style: none; }
@@ -198,7 +200,7 @@ i {
       align-items: center;
       border-radius: 50%; }
   .nav li {
-    font-size: 3em; }
+    font-size: 2.4em; }
     .nav li a:hover {
       opacity: 0.5; }
 
@@ -207,10 +209,6 @@ i {
     display: flex; }
     .nav li {
       font-size: 2.4em; } }
-
-@media (min-width: 1024px) {
-  .nav li {
-    font-size: 3em; } }
 
 .nav2 {
   display: block;

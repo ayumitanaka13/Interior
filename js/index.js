@@ -202,22 +202,46 @@ function removeCartItem(itemId) {
 
 // change item quantity
 function quantityChanged(itemId) {
+  // const clickedItem = document.querySelector(`[id='${itemId}']`);
+  // let clickedItem_val = clickedItem.querySelector('#cart_quantity').value;
+  const size = window.matchMedia("(min-width: 768px)");
+
+  const clickedItems = document.querySelectorAll(`[id='${itemId}']`);
+  const clickedItemsArrAll = Array.from(clickedItems);
+  const clickedItemsArr = clickedItemsArrAll.slice(0,2);
+  const laptop = clickedItemsArr[0];
+  const mobile = clickedItemsArr[1];
+  let laptop_val = laptop.querySelector('#cart_quantity').value;
+  let mobile_val = mobile.querySelector('#cart_quantity').value;
+
+  // to avoid enter less than 0
+  if (laptop_val < 0 || mobile_val < 0) {
+    laptop_val = 1;
+    mobile_val = 1;
+    alert('Invalid number');
+  }
+
   for (cart_item of cart_items) {
-    const clickedItem = document.querySelector(`[id='${itemId}']`);
-    let clickedItem_val = clickedItem.querySelector('#cart_quantity').value;
     const item_ids = cart_item.querySelectorAll('.cart_item');
-    // to avoid enter less than 0
-    if (clickedItem_val < 0) {
-      clickedItem_val = 1;
-    }
     // iterate through cart_item's id for laptop and mobile
     for (item_id of item_ids) {
-      // if clicked item's id is equal to cart_item's id, make same quantity as input value 
-      if (item_id.id == itemId) {
-        const item_vals = item_id.querySelectorAll('#cart_quantity');
-        // iterate through cart_item's id value laptop and mobile
-        for (item_val of item_vals) {
-          item_val.value = clickedItem_val;
+      if (size.matches) {
+        console.log("laptop,", laptop.id);
+        if (item_id.id == laptop.id) {
+          const item_vals = item_id.querySelectorAll('#cart_quantity');
+          // iterate through cart_item's id value laptop and mobile
+          for (item_val of item_vals) {
+            item_val.value = laptop_val;
+          }
+        }
+      } else {
+        console.log("mobile,", mobile.id);
+        if (item_id.id == mobile.id) {
+          const item_vals = item_id.querySelectorAll('#cart_quantity');
+          // iterate through cart_item's id value laptop and mobile
+          for (item_val of item_vals) {
+            item_val.value = mobile_val;
+          }
         }
       }
     }
@@ -274,15 +298,21 @@ function addItemToCart(arr) {
       span_trash.innerHTML = `<span><i class="fas fa-times"></i></span>`
       cart_trash.appendChild(span_trash)
 
-      const quantityInputs = document.querySelectorAll('#cart_quantity')
+      // const quantityInputs = document.querySelectorAll('#cart_quantity')
 
-      quantityInputs.forEach((quantityInput) => {
-        quantityInput.addEventListener('change', () =>
-        quantityChanged(product.id)
-        )
-      })
+      // quantityInputs.forEach((quantityInput) => {
+      //   quantityInput.addEventListener('change', () =>
+      //   quantityChanged(product.id)
+      //   )
+      // })
       cartUL.appendChild(cart_trash)
       ele.appendChild(cart)
+    })
+    const quantityInputs = document.querySelectorAll('#cart_quantity')
+    quantityInputs.forEach((quantityInput) => {
+      quantityInput.addEventListener('change', () =>
+      quantityChanged(product.id)
+      )
     })
   })
 }
