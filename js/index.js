@@ -319,7 +319,6 @@ function updateCartQtyTotal() {
     total += (price * quantity) / 2
     total_quantity += quantity / 2
   }
-
   total = Math.round(total * 100) / 100
 
   for (cart_total_price of cart_total_prices) {
