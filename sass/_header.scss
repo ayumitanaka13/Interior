@@ -28,5 +28,9 @@
 @media (min-width: 1024px) {
     .header {
         padding: 0 10%;
+        h4 {
+            margin: 0.4em 0;
+            font-size: 4em;
+        }
     }
 }

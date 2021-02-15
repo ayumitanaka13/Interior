@@ -166,7 +166,10 @@ i {
 
 @media (min-width: 1024px) {
   .header {
-    padding: 0 10%; } }
+    padding: 0 10%; }
+    .header h4 {
+      margin: 0.4em 0;
+      font-size: 4em; } }
 
 .nav {
   display: none;
@@ -208,7 +211,8 @@ i {
   .nav {
     display: flex; }
     .nav li {
-      font-size: 2.4em; } }
+      font-size: 2em;
+      font-weight: bold; } }
 
 .nav2 {
   display: block;
@@ -349,7 +353,7 @@ i {
     .top h1 {
       padding: 0 2.4em; }
     .top img {
-      margin-top: 14%; } }
+      margin-top: 16%; } }
 
 @media (min-width: 1024px) {
   .top {
@@ -498,7 +502,7 @@ i {
 
 @media (min-width: 1440px) {
   #store .cards img {
-    height: 650px; } }
+    height: 450px; } }
 
 #contact .title {
   flex-direction: column;
