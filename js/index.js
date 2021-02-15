@@ -177,10 +177,12 @@ const cart_items = document.querySelectorAll('#cart_items')
 const checkout = document.querySelector('#cart_checkout')
 checkout.addEventListener('click', function () {
   alert('Thank you for shopping with us!')
-  while (cart_items.hasChildNodes()) {
-    cart_items.removeChild(cart_items.firstChild)
+  for (cart_item of cart_items) {
+    while (cart_item.hasChildNodes()) {
+      cart_item.removeChild(cart_item.firstChild)
+    }
+    updateCartQtyTotal()
   }
-  updateCartQtyTotal()
 })
 
 // remove item from the cart
