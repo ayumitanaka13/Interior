@@ -173,12 +173,6 @@ function findItem(searchItem) {
 
 const cart_items = document.querySelectorAll('#cart_items')
 
-// change quantity
-// const quantityInputs = document.querySelectorAll('#cart_quantity')
-// for (let input of quantityInputs) {
-//   input.addEventListener('change', quantityChanged)
-// }
-
 // click checkout
 const checkout = document.querySelector('#cart_checkout')
 checkout.addEventListener('click', function () {
@@ -202,10 +196,6 @@ function removeCartItem(itemId) {
 
 // change item quantity
 function quantityChanged(itemId) {
-  // const clickedItem = document.querySelector(`[id='${itemId}']`);
-  // let clickedItem_val = clickedItem.querySelector('#cart_quantity').value;
-  const size = window.matchMedia("(min-width: 768px)");
-
   const clickedItems = document.querySelectorAll(`[id='${itemId}']`);
   const clickedItemsArrAll = Array.from(clickedItems);
   const clickedItemsArr = clickedItemsArrAll.slice(0,2);
@@ -213,6 +203,8 @@ function quantityChanged(itemId) {
   const mobile = clickedItemsArr[1];
   let laptop_val = laptop.querySelector('#cart_quantity').value;
   let mobile_val = mobile.querySelector('#cart_quantity').value;
+  // media query 
+  const size = window.matchMedia("(min-width: 768px)");
 
   // to avoid enter less than 0
   if (laptop_val < 0 || mobile_val < 0) {
@@ -220,25 +212,22 @@ function quantityChanged(itemId) {
     mobile_val = 1;
     alert('Invalid number');
   }
-
+  // iterate through cart_items
   for (cart_item of cart_items) {
     const item_ids = cart_item.querySelectorAll('.cart_item');
     // iterate through cart_item's id for laptop and mobile
     for (item_id of item_ids) {
+      const item_vals = item_id.querySelectorAll('#cart_quantity');
+      // laptop
       if (size.matches) {
-        console.log("laptop,", laptop.id);
-        if (item_id.id == laptop.id) {
-          const item_vals = item_id.querySelectorAll('#cart_quantity');
-          // iterate through cart_item's id value laptop and mobile
+        if (item_id.id === laptop.id) {
           for (item_val of item_vals) {
             item_val.value = laptop_val;
           }
         }
+      // mobile
       } else {
-        console.log("mobile,", mobile.id);
-        if (item_id.id == mobile.id) {
-          const item_vals = item_id.querySelectorAll('#cart_quantity');
-          // iterate through cart_item's id value laptop and mobile
+        if (item_id.id === mobile.id) {
           for (item_val of item_vals) {
             item_val.value = mobile_val;
           }
@@ -298,13 +287,6 @@ function addItemToCart(arr) {
       span_trash.innerHTML = `<span><i class="fas fa-times"></i></span>`
       cart_trash.appendChild(span_trash)
 
-      // const quantityInputs = document.querySelectorAll('#cart_quantity')
-
-      // quantityInputs.forEach((quantityInput) => {
-      //   quantityInput.addEventListener('change', () =>
-      //   quantityChanged(product.id)
-      //   )
-      // })
       cartUL.appendChild(cart_trash)
       ele.appendChild(cart)
     })
