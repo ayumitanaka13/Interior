@@ -38,7 +38,7 @@ body {
   font-family: 'Montserrat', sans-serif; }
 
 h1 {
-  font-size: 6em;
+  font-size: 5.6em;
   font-weight: 100;
   font-family: 'Cinzel', serif; }
 
@@ -68,6 +68,8 @@ a {
   color: #000;
   text-decoration: none;
   cursor: pointer; }
+  a:hover {
+    opacity: 0.5; }
 
 li {
   list-style: none; }
@@ -164,7 +166,10 @@ i {
 
 @media (min-width: 1024px) {
   .header {
-    padding: 0 10%; } }
+    padding: 0 10%; }
+    .header h4 {
+      margin: 0.4em 0;
+      font-size: 4em; } }
 
 .nav {
   display: none;
@@ -198,7 +203,7 @@ i {
       align-items: center;
       border-radius: 50%; }
   .nav li {
-    font-size: 3em; }
+    font-size: 2.4em; }
     .nav li a:hover {
       opacity: 0.5; }
 
@@ -206,11 +211,8 @@ i {
   .nav {
     display: flex; }
     .nav li {
-      font-size: 2.4em; } }
-
-@media (min-width: 1024px) {
-  .nav li {
-    font-size: 3em; } }
+      font-size: 2em;
+      font-weight: bold; } }
 
 .nav2 {
   display: block;
@@ -349,9 +351,9 @@ i {
   .top {
     margin-top: 24em; }
     .top h1 {
-      padding: 0 3em; }
+      padding: 0 2.4em; }
     .top img {
-      margin-top: 14%; } }
+      margin-top: 16%; } }
 
 @media (min-width: 1024px) {
   .top {

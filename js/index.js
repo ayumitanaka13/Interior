@@ -1,3 +1,4 @@
+// menu open
 $(function () {
   $('.toggle').click(function () {
     $(this).toggleClass('active')
@@ -5,6 +6,7 @@ $(function () {
   })
 })
 
+// cart open
 $('.shopping-cart').click(function () {
   $(this).toggleClass('on')
   $('.cart').slideToggle()
@@ -55,13 +57,12 @@ function showItems(datas) {
     }, apiData.slice())
 
   chunkedArr.forEach((box, index) => {
-
     const cards = document.createElement('div')
     cards.classList.add('swiper-slide')
     cards.classList.add('cards')
 
     box.forEach((item, index) => {
-      const { id, name, price, description, image_url } = item;
+      const { id, name, price, description, image_url } = item
       const card = document.createElement('div')
       card.classList.add('card')
       card.id = id
@@ -84,8 +85,8 @@ function showItems(datas) {
 
       // add clicked item to cart
       shoppingCart.addEventListener('click', (e) => {
-        e.stopPropagation()
         addToCart({ id, name, price, description, image_url })
+        e.stopPropagation()
       })
 
       const priceSign = document.createElement('h6')
@@ -121,7 +122,7 @@ function showItems(datas) {
 
 // showTags
 function showTags(datas) {
-  let tags = [];
+  let tags = []
   datas.forEach((data) => {
     tagsArr.push(data.category)
     tags = tagsArr.filter(function (x, i, self) {
@@ -136,7 +137,7 @@ function showTags(datas) {
     categories.append(btn)
   })
 
-  const tagButtons = document.querySelectorAll('.category');
+  const tagButtons = document.querySelectorAll('.category')
   for (let tagBtn of tagButtons) {
     const clickedTag = tagBtn.innerText.replace('#', '').trim();
     tagBtn.addEventListener('click', function(e) {
@@ -149,7 +150,7 @@ function showTags(datas) {
 // search item
 const search = document.querySelector('.search')
 search.addEventListener('input', function (e) {
-  findItem(e.target.value);
+  findItem(e.target.value)
 })
 function findItem(searchItem) {
   const filteredItems = responseData.filter((item) => {
@@ -168,16 +169,9 @@ function findItem(searchItem) {
   showItems(filteredItems)
 }
 
-
 // --------------------------- cart function ----------------------------
 
 const cart_items = document.querySelectorAll('#cart_items')
-
-// change quantity
-const quantityInputs = document.querySelectorAll('#cart_quantity')
-for (let input of quantityInputs) {
-  input.addEventListener('change', quantityChanged);
-}
 
 // click checkout
 const checkout = document.querySelector('#cart_checkout')
@@ -196,7 +190,6 @@ checkout.addEventListener('click', function () {
 function removeCartItem(itemId) {
   //remove item from global array
   cartArr = cartArr.filter((product) => product.id !== itemId)
-
   //remove item from each mobile/desktop cart_item div
   cart_items.forEach(() => {
     $('#' + itemId).remove()
@@ -204,22 +197,58 @@ function removeCartItem(itemId) {
   updateCartQtyTotal()
 }
 
-const changeValue = (val) => {
-  for (cart_item of cart_items) {
-    const cart_li = cart_item.firstChild.firstChild.firstChild.nextElementSibling.nextElementSibling.nextElementSibling;
-    cart_li.innerHTML = "";
-    cart_li.innerHTML = `<input id="cart_quantity" type="number" value="${val}" onChange="quantityChanged(event)">`;
+// change item quantity
+function quantityChanged(itemId) {
+  const clickedItems = document.querySelectorAll(`[id='${itemId}']`);
+  const clickedItemsArrAll = Array.from(clickedItems);
+  const clickedItemsArr = clickedItemsArrAll.slice(0,2);
+  const laptop = clickedItemsArr[0];
+  const mobile = clickedItemsArr[1];
+  let laptop_val = laptop.querySelector('#cart_quantity').value;
+  let mobile_val = mobile.querySelector('#cart_quantity').value;
+  // media query 
+  const size = window.matchMedia("(min-width: 768px)");
+
+  // to avoid enter less than 0
+  if (laptop_val < 0 || mobile_val < 0) {
+    laptop_val = 1;
+    mobile_val = 1;
+    alert('Invalid number');
   }
+  // iterate through cart_items
+  for (cart_item of cart_items) {
+    const item_ids = cart_item.querySelectorAll('.cart_item');
+    // iterate through cart_item's id for laptop and mobile
+    for (item_id of item_ids) {
+      const item_vals = item_id.querySelectorAll('#cart_quantity');
+      // laptop
+      if (size.matches) {
+        if (item_id.id === laptop.id) {
+          for (item_val of item_vals) {
+            item_val.value = laptop_val;
+          }
+        }
+      // mobile
+      } else {
+        if (item_id.id === mobile.id) {
+          for (item_val of item_vals) {
+            item_val.value = mobile_val;
+          }
+        }
+      }
+    }
+  }
+  updateCartQtyTotal();
 }
 
 
 // get clicked item
 function addToCart(data) {
-  if (cartArr.length <= 0) cartArr.push(data)
+  if (cartArr.length <= 0) cartArr.push({ ...data, quantity: 1 })
 
   const findById = cartArr.find((e) => e.id === data.id)
   if (!findById) {
-    cartArr.push(data)
+    cartArr.push({ ...data, quantity: 1 })
   }
   addItemToCart(cartArr)
   updateCartQtyTotal()
@@ -248,35 +277,28 @@ function addItemToCart(arr) {
             ${product.name}
           </li>
           <li>
-            <input id="cart_quantity" class="${product.id} "type="number" value="1" onChange="quantityChanged(event)">
+            <input id="cart_quantity" type="number" value="${product.quantity}">
           </li>
           <li>
             $ <span id="cart_price">${product.price}</span>
           </li>
       `
       cart.appendChild(cartUL)
-
-      // const quantityInputs = document.querySelectorAll('#cart_quantity')
-      // // console.log(quantityInputs);
-      // for (let input of quantityInputs) {
-      //   //input.addEventListener('input', updateValue);
-      //   input.addEventListener('change', quantityChanged);
-      // }
-
       const cart_trash = document.createElement('li')
       cartUL.appendChild(cart_trash)
       const span_trash = document.createElement('span')
       span_trash.addEventListener('click', () => removeCartItem(product.id))
       span_trash.innerHTML = `<span><i class="fas fa-times"></i></span>`
-      cart_trash.appendChild(span_trash);
+      cart_trash.appendChild(span_trash)
 
-      const quantityInputs = document.querySelectorAll('#cart_quantity');
-      quantityInputs.forEach((quantityInput) => {
-        quantityInput.addEventListener('change', () => quantityChanged(quantityInput, product.id));
-      })
-  
       cartUL.appendChild(cart_trash)
       ele.appendChild(cart)
+    })
+    const quantityInputs = document.querySelectorAll('#cart_quantity')
+    quantityInputs.forEach((quantityInput) => {
+      quantityInput.addEventListener('change', () =>
+      quantityChanged(product.id)
+      )
     })
   })
 }
@@ -292,21 +314,13 @@ function updateCartQtyTotal() {
   for (cart of carts) {
     const priceEl = cart.querySelector('#cart_price')
     const quantityEl = cart.querySelector('#cart_quantity')
-    const quantityEls = cart.querySelectorAll('#cart_quantity')
-    for (q of quantityEls) {
-      // console.log(q);
-    }
-    // console.log(quantityEls);
 
     const price = parseFloat(priceEl.textContent)
-    // quantity = quantityEl.value
-    const quantity = quantityEl.value
+    quantity = quantityEl.value
 
-
-    total += price * quantity /2;
-    total_quantity += quantity /2;
+    total += (price * quantity) / 2
+    total_quantity += quantity / 2
   }
-
   total = Math.round(total * 100) / 100
 
   for (cart_total_price of cart_total_prices) {

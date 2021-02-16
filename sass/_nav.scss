@@ -41,7 +41,7 @@
     }
   }
   li {
-    font-size: 3em;
+    font-size: 2.4em;
     a {
       &:hover {
         opacity: 0.5;
@@ -54,15 +54,12 @@
   .nav {
     display: flex;
     li {
-      font-size: 2.4em;
+      font-size: 2em;
+      font-weight: bold;
     }
   }
 }
 
 @media (min-width: 1024px) {
-  .nav {
-    li {
-      font-size: 3em;
-    }
-  }
+
 }
