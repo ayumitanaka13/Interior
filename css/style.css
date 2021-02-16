@@ -502,7 +502,7 @@ i {
 
 @media (min-width: 1440px) {
   #store .cards img {
-    height: 550px; } }
+    height: 500px; } }
 
 #contact .title {
   flex-direction: column;
