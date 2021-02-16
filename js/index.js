@@ -183,9 +183,12 @@ for (let input of quantityInputs) {
 const checkout = document.querySelector('#cart_checkout')
 checkout.addEventListener('click', function () {
   alert('Thank you for shopping with us!')
-  while (cart_items.hasChildNodes()) {
-    cart_items.removeChild(cart_items.firstChild)
-  }
+  // while (cart_items.hasChildNodes()) {
+  //   cart_items.removeChild(cart_items.firstChild)
+  // }
+  cart_items.forEach((item) => {
+    item.remove()
+  })
   updateCartQtyTotal()
 })
 
@@ -201,27 +204,14 @@ function removeCartItem(itemId) {
   updateCartQtyTotal()
 }
 
-// change item quantity
-function quantityChanged(itemId) {
-  cart_items.forEach((cart_item) => {
-    // console.log(cart_item);
-    const clickedId = cart_item.firstChild.id;
-    // console.log(clickedId);
-    // console.log(itemId);
-    if (clickedId == itemId) {
-      const cart_item_clicked = cart_item.firstChild.firstChild.firstChild.nextElementSibling.nextElementSibling.nextElementSibling;
-      
-      console.log(cart_item_clicked.childElement);
-      // console.log(cart_item);
-      }
-  })
-
-  // const inputNum = e.target
-  // if (isNaN(inputNum.value) || inputNum.value <= 0) {
-  //   inputNum.value = 1
-  // }
-  updateCartQtyTotal()
+const changeValue = (val) => {
+  for (cart_item of cart_items) {
+    const cart_li = cart_item.firstChild.firstChild.firstChild.nextElementSibling.nextElementSibling.nextElementSibling;
+    cart_li.innerHTML = "";
+    cart_li.innerHTML = `<input id="cart_quantity" type="number" value="${val}" onChange="quantityChanged(event)">`;
+  }
 }
+
 
 // get clicked item
 function addToCart(data) {
@@ -258,7 +248,7 @@ function addItemToCart(arr) {
             ${product.name}
           </li>
           <li>
-            <input id="cart_quantity" type="number" value="1" onChange="quantityChanged(event)">
+            <input id="cart_quantity" class="${product.id} "type="number" value="1" onChange="quantityChanged(event)">
           </li>
           <li>
             $ <span id="cart_price">${product.price}</span>
@@ -282,7 +272,7 @@ function addItemToCart(arr) {
 
       const quantityInputs = document.querySelectorAll('#cart_quantity');
       quantityInputs.forEach((quantityInput) => {
-        quantityInput.addEventListener('change', () => quantityChanged(product.id));
+        quantityInput.addEventListener('change', () => quantityChanged(quantityInput, product.id));
       })
   
       cartUL.appendChild(cart_trash)
